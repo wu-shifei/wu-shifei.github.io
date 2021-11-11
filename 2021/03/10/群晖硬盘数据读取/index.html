@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>群晖硬盘数据读取 | 程序员记事本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="目标：群晖拆下硬盘中的数据拷贝到移动硬盘中 1. 群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，2. 移动硬盘通过USB查到树莓派3. 输入命令查看硬盘信息   &#x2F;dev&#x2F;sdb是群晖硬盘其中&#x2F;dev&#x2F;sdb1和&#x2F;dev&#x2F;sdb2分区是群晖系统用，&#x2F;dev&#x2F;sdb5才是数据存储用分区   &#x2F;dev&#x2F;sdc是移动硬盘 1sudo fdisk –l 123456789101112131415161">
+<meta property="og:type" content="article">
+<meta property="og:title" content="群晖硬盘数据读取">
+<meta property="og:url" content="https://wushifei.com/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/index.html">
+<meta property="og:site_name" content="程序员记事本">
+<meta property="og:description" content="目标：群晖拆下硬盘中的数据拷贝到移动硬盘中 1. 群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，2. 移动硬盘通过USB查到树莓派3. 输入命令查看硬盘信息   &#x2F;dev&#x2F;sdb是群晖硬盘其中&#x2F;dev&#x2F;sdb1和&#x2F;dev&#x2F;sdb2分区是群晖系统用，&#x2F;dev&#x2F;sdb5才是数据存储用分区   &#x2F;dev&#x2F;sdc是移动硬盘 1sudo fdisk –l 123456789101112131415161">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-09T20:01:23.779Z">
+<meta property="article:modified_time" content="2021-03-28T17:09:19.299Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="群晖">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="程序员记事本" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程序员记事本</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wushifei.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-群晖硬盘数据读取" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/" class="article-date">
+  <time class="dt-published" datetime="2021-03-09T20:01:23.779Z" itemprop="datePublished">2021-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/knowhow/">knowhow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      群晖硬盘数据读取
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>目标：群晖拆下硬盘中的数据拷贝到移动硬盘中</p>
+<h2 id="1-群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，"><a href="#1-群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，" class="headerlink" title="1. 群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，"></a>1. 群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，</h2><h2 id="2-移动硬盘通过USB查到树莓派"><a href="#2-移动硬盘通过USB查到树莓派" class="headerlink" title="2. 移动硬盘通过USB查到树莓派"></a>2. 移动硬盘通过USB查到树莓派</h2><h2 id="3-输入命令查看硬盘信息"><a href="#3-输入命令查看硬盘信息" class="headerlink" title="3. 输入命令查看硬盘信息"></a>3. 输入命令查看硬盘信息</h2><p>   /dev/sdb是群晖硬盘<br>其中/dev/sdb1和/dev/sdb2分区是群晖系统用，/dev/sdb5才是数据存储用分区<br>   /dev/sdc是移动硬盘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk –l</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sdb: 3.7 TiB, 4000787030016 bytes, 7814037168 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 4096 bytes</span><br><span class="line">I/O size (minimum/optimal): 4096 bytes / 4096 bytes</span><br><span class="line">Disklabel type: gpt</span><br><span class="line">Disk identifier: 0B6B4E4C-7C1F-4834-AD96-8B1A4C779AEF</span><br><span class="line"></span><br><span class="line">Device       Start        End    Sectors  Size Type</span><br><span class="line">/dev/sdb1     2048    4982527    4980480  2.4G Linux RAID</span><br><span class="line">/dev/sdb2  4982528    9176831    4194304    2G Linux RAID</span><br><span class="line">/dev/sdb5  9453280 7813830239 7804376960  3.6T Linux RAID</span><br><span class="line"></span><br><span class="line">Disk /dev/sdc: 1.4 TiB, 1500301910016 bytes, 2930277168 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disklabel type: dos</span><br><span class="line">Disk identifier: 0x4eea0366</span><br><span class="line"></span><br><span class="line">Device     Boot Start        End    Sectors  Size Id Type</span><br><span class="line">/dev/sdc1           2 2930277167 2930277166  1.4T  7 HPFS/NTFS/exFAT</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-创建文件加用来挂在硬盘"><a href="#4-创建文件加用来挂在硬盘" class="headerlink" title="4. 创建文件加用来挂在硬盘"></a>4. 创建文件加用来挂在硬盘</h2><p>   src用来挂载群晖硬盘<br>   dst用来挂载移动硬盘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /mnt/src</span><br><span class="line">sudo mkdir /mnt/dst</span><br><span class="line">ls /mnt</span><br><span class="line"></span><br><span class="line">dst  src</span><br></pre></td></tr></table></figure>
+<h2 id="5-挂载群晖硬盘"><a href="#5-挂载群晖硬盘" class="headerlink" title="5. 挂载群晖硬盘"></a>5. 挂载群晖硬盘</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdb5 /mnt/src</span><br><span class="line"></span><br><span class="line">mount: unknown filesystem type &#x27;linux_raid_member&#x27;</span><br></pre></td></tr></table></figure>
+<p>上面提示是因为群晖的软linux_raid格式不能直接挂载，需要安装两个软件mdadm和lvm2</p>
+<h3 id="5-1-安装mdadm和lvm2"><a href="#5-1-安装mdadm和lvm2" class="headerlink" title="5.1 安装mdadm和lvm2"></a>5.1 安装mdadm和lvm2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mdadm lvm2</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-扫描群晖硬盘"><a href="#5-2-扫描群晖硬盘" class="headerlink" title="5.2 扫描群晖硬盘"></a>5.2 扫描群晖硬盘</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdadm -Asf &amp;&amp; vgchange -ay</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-查看Logical-Volume信息"><a href="#5-3-查看Logical-Volume信息" class="headerlink" title="5.3 查看Logical Volume信息"></a>5.3 查看Logical Volume信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo lvdisplay</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">--- Logical volume ---</span><br><span class="line">LV Path                /dev/vg1001/lv</span><br><span class="line">LV Name                lv</span><br><span class="line">VG Name                vg1001</span><br><span class="line">LV UUID                36nTHZ-D4IF-m5e3-rNhI-kg6x-OwpT-5mSYCs</span><br><span class="line">LV Write Access        read/write</span><br><span class="line">LV Creation host, time ,</span><br><span class="line">LV Status              available</span><br><span class="line"># open                 0</span><br><span class="line">LV Size                3.63 TiB</span><br><span class="line">Current LE             952682</span><br><span class="line">Segments               1</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently set to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-挂载"><a href="#5-4-挂载" class="headerlink" title="5.4 挂载"></a>5.4 挂载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/vg1001/lv /mnt/src</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-查看挂载是否成功"><a href="#5-5-查看挂载是否成功" class="headerlink" title="5.5 查看挂载是否成功"></a>5.5 查看挂载是否成功</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /mnt/src</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@afpd.core                  homes                  @SYNO.Finder.Fil.core</span><br><span class="line">@appstore                   music                  @SynologyApplicationService</span><br><span class="line">aquota.group                OWDownload             @synologydrive</span><br><span class="line">aquota.user                 photo                  @synophoto-geoco.core</span><br><span class="line">@autoupdate                 @S2S                   synoquota.db</span><br><span class="line">@builtin-dyn-aut.core       svn                    @SystemInfo.cgi.core</span><br><span class="line">@cloudsync                  @synoaudiod.core       @temp@</span><br><span class="line">@database                   @SYNO.Core.DSMNo.core  @tmp</span><br><span class="line">@download                   @SYNO.Core.Syste.core  @transmissiond.core</span><br><span class="line">@eaDir                      @SynoDrive             video</span><br><span class="line">esynoscheduler.output.4094  @synoelasticd.core     web</span><br><span class="line">esynoscheduler.output.8630  @SYNO.Entry.Requ.core  work</span><br><span class="line">esynoscheduler.output.8701  @SYNO.FileStatio.core</span><br></pre></td></tr></table></figure>
+<p>OK</p>
+<h2 id="6-挂载移动硬盘"><a href="#6-挂载移动硬盘" class="headerlink" title="6. 挂载移动硬盘"></a>6. 挂载移动硬盘</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdc1 /mnt/dst</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount: unknown filesystem type &#x27;exfat&#x27;</span><br></pre></td></tr></table></figure>
+<p>不支持exfat文件系统，需要先安装依赖</p>
+<h3 id="6-1-安装exfat-fuse"><a href="#6-1-安装exfat-fuse" class="headerlink" title="6.1 安装exfat-fuse"></a>6.1 安装exfat-fuse</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install exfat-fuse</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-挂载"><a href="#6-2-挂载" class="headerlink" title="6.2 挂载"></a>6.2 挂载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdc1 /mnt/dst</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FUSE exfat 1.2.5</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-查看挂载是否成功"><a href="#6-3-查看挂载是否成功" class="headerlink" title="6.3 查看挂载是否成功"></a>6.3 查看挂载是否成功</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /mnt/dst</span><br></pre></td></tr></table></figure>
+<p>OK</p>
+<h2 id="7，在后台拷贝"><a href="#7，在后台拷贝" class="headerlink" title="7，在后台拷贝"></a>7，在后台拷贝</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nohup cp -r /mnt/src/ /mnt/dst/ &gt;cp_src2dst.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1] 1652</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/" data-id="ckvuzyrnc001x2eqv0kdka9ki" data-title="群晖硬盘数据读取" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/16/SVN%E4%B8%8D%E8%83%BDCleanup%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20Cleanup%20failed%20to%20process%20the%20following%20paths/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SVN不能Cleanup解决方法 Cleanup failed to process the following paths
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BASVN/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">树莓派搭建SVN</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iot/">iot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/knowhow/">knowhow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%BB%98%E8%AE%A4%E5%88%86%E7%B1%BB/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL-vscode/" rel="tag">WSL | vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnf/" rel="tag">dnf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-scp/" rel="tag">linux | scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" rel="tag">ppg | 心率测量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/" rel="tag">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps-%E5%9F%9F%E5%90%8D/" rel="tag">vps | 域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" rel="tag">博客 | vps | halo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">树莓派 | jellyfin | 多媒体服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" rel="tag">树莓派 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" rel="tag">树莓派 | svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" rel="tag">树莓派 | 域名 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" rel="tag">比特币 | bitcoin core | vs2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" rel="tag">电脑远程开机 | esp01s | esp8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/VBA/" style="font-size: 10px;">VBA</a> <a href="/tags/WSL-vscode/" style="font-size: 10px;">WSL | vscode</a> <a href="/tags/dnf/" style="font-size: 10px;">dnf</a> <a href="/tags/linux-scp/" style="font-size: 10px;">linux | scp</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" style="font-size: 10px;">ppg | 心率测量</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vps-%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">vps | 域名</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" style="font-size: 10px;">博客 | vps | halo</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">树莓派 | jellyfin | 多媒体服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" style="font-size: 10px;">树莓派 | python</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" style="font-size: 10px;">树莓派 | svn</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" style="font-size: 10px;">树莓派 | 域名 | python</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" style="font-size: 10px;">比特币 | bitcoin core | vs2019</a> <a href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" style="font-size: 10px;">电脑远程开机 | esp01s | esp8266</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/07/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/07/%E5%9C%A8%E5%90%8C%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E7%9A%84ssh%20key%E3%80%90ssh%20key%20already%20in%20use%20github%E3%80%91/">在同一台电脑上管理多个github账号的ssh key【ssh key already in use github】</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/07/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BBhalo%E2%86%92hexo/">博客迁移halo→hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/06/%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E5%92%8CDDNS/">配置二级域名和DDNS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/04/%E5%88%A9%E7%94%A8github%20pages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/">利用github pages托管静态网站</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

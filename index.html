@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>程序员记事本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:title" content="程序员记事本">
+<meta property="og:url" content="https://wushifei.com/index.html">
+<meta property="og:site_name" content="程序员记事本">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="嵌入式 程序员">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="程序员记事本" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -42,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">程序员记事本</a>
       </h1>
       
     </div>
@@ -62,7 +63,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wushifei.com"></form>
       </div>
     </div>
   </div>
@@ -110,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/11/07/hello-world/" data-id="ckvomy08l0000lgqve0ascphm" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/11/07/hello-world/" data-id="ckvomy08l0000lgqve0ascphm" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -122,25 +123,519 @@
 
 
   
+    <article id="post-在同一台电脑上管理多个github账号的ssh key【ssh key already in use github】" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/11/07/%E5%9C%A8%E5%90%8C%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E7%9A%84ssh%20key%E3%80%90ssh%20key%20already%20in%20use%20github%E3%80%91/" class="article-date">
+  <time class="dt-published" datetime="2021-11-06T19:16:01.446Z" itemprop="datePublished">2021-11-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/knowhow/">knowhow</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/11/07/%E5%9C%A8%E5%90%8C%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E7%9A%84ssh%20key%E3%80%90ssh%20key%20already%20in%20use%20github%E3%80%91/">在同一台电脑上管理多个github账号的ssh key【ssh key already in use github】</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>今天新建了一个github账号，结果设置时提示ssh key already in use github。<br>通过设置两个密钥，并配置到不同域名的方式解决了这个问题。</p>
+<h2 id="设置密钥"><a href="#设置密钥" class="headerlink" title="设置密钥"></a>设置密钥</h2><p>用两个邮箱分别生成两个密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加私钥"><a href="#添加私钥" class="headerlink" title="添加私钥"></a>添加私钥</h2><p>分别把两个密钥添加到ssh-agent的维护列表中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add &#x27;私钥路径&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h2><p>在.ssh目录下创建config文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#邮箱1对应账号</span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#邮箱2对应账号</span><br><span class="line">Host github2.com</span><br><span class="line">HostName github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa2</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>在使用时邮箱1按原本方法正常使用即可。<br>在使用邮箱2对应的账号时，把命令或连接中的github.com修改为github2.com</p>
+<p>例如测试连接时<br>邮箱1对应的测试命令为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>邮箱2对应的测试命令为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github2.com</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/11/07/%E5%9C%A8%E5%90%8C%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E7%9A%84ssh%20key%E3%80%90ssh%20key%20already%20in%20use%20github%E3%80%91/" data-id="ckvuzyrn4001b2eqvdj0ccorj" data-title="在同一台电脑上管理多个github账号的ssh key【ssh key already in use github】" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-博客迁移halo→hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/11/07/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BBhalo%E2%86%92hexo/" class="article-date">
+  <time class="dt-published" datetime="2021-11-06T17:02:13.838Z" itemprop="datePublished">2021-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/11/07/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BBhalo%E2%86%92hexo/">博客迁移halo→hexo</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>原本为了简单，博客用的是halo。但是由于隔段时间就出现问题需要重启，索性换一个静态博客系统。</p>
+<h2 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>我电脑已经装过了，本步跳过。<br>没有安装的同学可以在WSL的ubuntu命令行下执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
+<p>安装好后，用git –version 来查看一下版本<br>（git version 2.25.1）</p>
+<h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><ul>
+<li>我电脑已经装过了，但是版本低，我要把nodejs和npm升级到最新版本。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo npm cache clean -f</span><br><span class="line">sudo npm install -g n</span><br><span class="line">sudo n stable</span><br><span class="line">sudo npm install npm@latest -g</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>没有安装的同学可以在WSL的ubuntu命令行下执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nodejs</span><br><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure>
+安装好后，用node -v和npm -v来查看一下版本。<br>（node v16.13.0）<br>（npm 8.1.3）</li>
+</ul>
+<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>在WSL的ubuntu命令行下执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>安装好后，用hexo -v来查看一下版本。<br>（<br>hexo-cli: 4.3.0<br>os: linux 4.4.0-19041-Microsoft Ubuntu 20.04.3 LTS (Focal Fossa)<br>http_parser: 2.9.3<br>node: 10.19.0<br>v8: 6.8.275.32-node.55<br>uv: 1.34.2<br>zlib: 1.2.11<br>brotli: 1.0.7<br>ares: 1.15.0<br>modules: 64<br>nghttp2: 1.40.0<br>napi: 5<br>openssl: 1.1.1d<br>icu: 66.1<br>unicode: 13.0<br>cldr: 36.1<br>tz: 2021a<br>）</p>
+<h3 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init blogWushifei</span><br><span class="line">cd blogWushifei</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成-amp-运行"><a href="#生成-amp-运行" class="headerlink" title="生成&amp;运行"></a>生成&amp;运行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>接下来在浏览器输入<a href="http://localhost:4000就可以打开刚刚生成的博客了。">http://localhost:4000就可以打开刚刚生成的博客了。</a></p>
+<h2 id="将博客部署到github-pages"><a href="#将博客部署到github-pages" class="headerlink" title="将博客部署到github pages"></a>将博客部署到github pages</h2><p>由于是静态博客，索性放到github pages上面。</p>
+<h3 id="github-pages设置"><a href="#github-pages设置" class="headerlink" title="github pages设置"></a>github pages设置</h3><p>可以参考这篇博客<a target="_blank" rel="noopener" href="https://www.wushifei.com/archives/%E5%88%A9%E7%94%A8githubpages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99">利用github pages托管静态网站</a></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/11/07/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BBhalo%E2%86%92hexo/" data-id="ckvuzyrn5001e2eqv0eaiad1r" data-title="博客迁移halo→hexo" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-配置二级域名和DDNS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/06/%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E5%92%8CDDNS/" class="article-date">
+  <time class="dt-published" datetime="2021-10-05T21:29:01.705Z" itemprop="datePublished">2021-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/06/%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E5%92%8CDDNS/">配置二级域名和DDNS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>原本用的是华硕的免费ddns，但是跟一段时间需要重新申请，有一点麻烦。今天把自己原有的域名设置一个二级域名并设置DDNS。</p>
+<h2 id="GoDaddy二级域名设置"><a href="#GoDaddy二级域名设置" class="headerlink" title="GoDaddy二级域名设置"></a>GoDaddy二级域名设置</h2><p>在域名的DNS管理界面新增一条记录<br><img src="https://www.wushifei.com/upload/2021/10/%E5%9B%BE%E7%89%87-86567c528168420497c3cf12af2441d7.png" alt="图片.png"><br>类型：A<br>主机：二级域名前缀<br>指向：主机IP</p>
+<h2 id="DDNS设置"><a href="#DDNS设置" class="headerlink" title="DDNS设置"></a>DDNS设置</h2><h3 id="申请GoDaddy-API-Key"><a href="#申请GoDaddy-API-Key" class="headerlink" title="申请GoDaddy API Key"></a>申请GoDaddy API Key</h3><p>在<a target="_blank" rel="noopener" href="https://developer.godaddy.com/keys">API Key Management</a>登录自己的账号并申请API Key</p>
+<p><img src="https://www.wushifei.com/upload/2021/10/%E5%9B%BE%E7%89%87-989bc06ef4f348d88f305e7cee409f6d.png" alt="图片.png"><br>在2 API Key Details界面的信息只会显示一次，一定要记下来再推出。</p>
+<h3 id="ddns脚本执行"><a href="#ddns脚本执行" class="headerlink" title="ddns脚本执行"></a>ddns脚本执行</h3><p>原本计划ddns有两个方案：</p>
+<ol>
+<li>华硕路由器提供的免费ddns<br>但是隔段时间要重新申请计较麻烦</li>
+<li>软件中心（华硕路由器+Koolshare固件才有软件中心）的软件Gdddns<br>但是执行有错误</li>
+</ol>
+<p>由于上述2个问题，而且刚好之前在树莓派上跑了一个脚本来用邮件通知IP的变化，这一次索性就在次基础上在加一个ddns设定的脚本。</p>
+<h4 id="python-脚本做成"><a href="#python-脚本做成" class="headerlink" title="python 脚本做成"></a>python 脚本做成</h4><p>在/home/usr/ddns下新建一个文件ddnsGodaddy.py</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">import configparser</span><br><span class="line">import json</span><br><span class="line">from urllib.request import urlopen</span><br><span class="line">import datetime</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class DDNS():</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.GetIP()</span><br><span class="line">        self.GetINI(&#x27;/home/usr/ddns/ddns.ini&#x27;)</span><br><span class="line"></span><br><span class="line">    def GetIP(self):</span><br><span class="line">        ipconf = urlopen(&#x27;http://ip.42.pl/raw&#x27;).read()</span><br><span class="line">        self.NowIP = ipconf.decode(encoding=&#x27;UTF-8&#x27;, errors=&#x27;strict&#x27;)</span><br><span class="line"></span><br><span class="line">    def GetINI(self, filename):</span><br><span class="line">        conf = configparser.ConfigParser()</span><br><span class="line">        conf.read(filename)</span><br><span class="line">        sections = conf.sections()</span><br><span class="line">        self.domain = sections[0]</span><br><span class="line">        items = conf.items(self.domain)</span><br><span class="line">        i, self.ip = items[0]</span><br><span class="line">        i, self.key = items[1]</span><br><span class="line">        i, self.url = items[2]</span><br><span class="line">        if self.NowIP != self.ip:</span><br><span class="line">            text = &#x27; ip检测到变更！当前时间ip：&#x27;+self.NowIP+&#x27; 配置文件ip：&#x27;+self.ip</span><br><span class="line">            self.WirteLog(text)</span><br><span class="line">            conf.set(self.domain, &#x27;ip&#x27;, self.NowIP)</span><br><span class="line">            conf.write(open(filename, &#x27;r+&#x27;))</span><br><span class="line">            self.UpdateDNS()</span><br><span class="line">            if self.code == 200:</span><br><span class="line">                text = &#x27; 域名&#x27;+self.domain+&#x27;已解析至&#x27;+self.NowIP</span><br><span class="line">                self.WirteLog(text)</span><br><span class="line">            else:</span><br><span class="line">                text = &#x27; 错误！返回错误代码：&#x27;+self.code</span><br><span class="line">        else:</span><br><span class="line">            text = &#x27; ip未检测到变更！当前时间ip：&#x27;+self.NowIP+&#x27; 配置文件ip：&#x27;+self.ip</span><br><span class="line">            self.WirteLog(text)</span><br><span class="line"></span><br><span class="line">    def UpdateDNS(self):</span><br><span class="line">        records = &#123;</span><br><span class="line">            # 修改的域名</span><br><span class="line">            &quot;data&quot;: self.NowIP,</span><br><span class="line">            # 指向方式</span><br><span class="line">            &quot;name&quot;: &quot;@&quot;,</span><br><span class="line">            # 指向端口</span><br><span class="line">            &quot;port&quot;: 80,</span><br><span class="line">            # ttl时间，最小600</span><br><span class="line">            &quot;ttl&quot;: 600,</span><br><span class="line">            # 指向形式</span><br><span class="line">            &quot;type&quot;: &quot;A&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        # 请求头</span><br><span class="line">        head = &#123;</span><br><span class="line">            &#x27;accept&#x27;: &#x27;application/json&#x27;,</span><br><span class="line">            &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,</span><br><span class="line">            # 需要改为自己的key和pd</span><br><span class="line">            &#x27;Authorization&#x27;: self.key</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        # 官方的默认dns信息，统一的，如果不带上，会返回422错误</span><br><span class="line">        records_NS01 = &#123;</span><br><span class="line">            &quot;data&quot;: &quot;ns07.domaincontrol.com&quot;,</span><br><span class="line">            &quot;name&quot;: &quot;@&quot;,</span><br><span class="line">            &quot;ttl&quot;: 3600,</span><br><span class="line">            &quot;type&quot;: &quot;NS&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        records_NS02 = &#123;</span><br><span class="line">            &quot;data&quot;: &quot;ns08.domaincontrol.com&quot;,</span><br><span class="line">            &quot;name&quot;: &quot;@&quot;,</span><br><span class="line">            &quot;ttl&quot;: 3600,</span><br><span class="line">            &quot;type&quot;: &quot;NS&quot;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        # 组件发送信息，信息要转成json形式，可以在发送转也可以生成的时候转，我直接在生成数据转了</span><br><span class="line">        put_data = json.dumps([records, records_NS01, records_NS02])</span><br><span class="line"></span><br><span class="line">        # 请求的url，根据自己的域名变更范例的url</span><br><span class="line">        req = requests.put(self.url, headers=head, data=put_data)</span><br><span class="line">        self.code = req.status_code</span><br><span class="line"></span><br><span class="line">    def WirteLog(self, logtext):</span><br><span class="line">        time = datetime.datetime.now()</span><br><span class="line">        time = str(time)</span><br><span class="line">        with open(&#x27;/home/usr/ddns/log.txt&#x27;, &#x27;a+&#x27;) as log:</span><br><span class="line">            log.write(time+logtext+&#x27;\n&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    DDNS()</span><br></pre></td></tr></table></figure>
+
+<h4 id="新建一个ddns-ini配置文件"><a href="#新建一个ddns-ini配置文件" class="headerlink" title="新建一个ddns.ini配置文件"></a>新建一个ddns.ini配置文件</h4><p>把里面的yourdomain替换成你的域名， yourkey 、yourSecret替换成刚才生成的key和secret。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[yourdomain]</span><br><span class="line">ip = yourIP</span><br><span class="line">key = sso-key yourkey:yourSecret</span><br><span class="line">url = https://api.godaddy.com/v1/domains/yourdomain/records</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置定时任务"><a href="#设置定时任务" class="headerlink" title="设置定时任务"></a>设置定时任务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 */2 * * * /usr/bin/python3 /home/usr/ddns/ddnsGodaddy.py</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>PS:部分内容参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/68c904404ef6">https://www.jianshu.com/p/68c904404ef6</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/10/06/%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E5%92%8CDDNS/" data-id="ckvuzyrne00232eqv8gfr8mx3" data-title="配置二级域名和DDNS" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" rel="tag">树莓派 | 域名 | python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-利用github pages托管静态网站" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/04/%E5%88%A9%E7%94%A8github%20pages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" class="article-date">
+  <time class="dt-published" datetime="2021-10-03T20:43:34.231Z" itemprop="datePublished">2021-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/04/%E5%88%A9%E7%94%A8github%20pages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/">利用github pages托管静态网站</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>背景：</strong><br>前一段时间朋友委托一个公司做一个简单的公司主页网站，结果花了钱效果还不满意，就跟我抱怨了一下。现在的公司主页大部分都是直接用模板来改，很便宜，但是如果有个性化需求那价格可能就要翻倍了。刚好那段时间无聊就按朋友需求帮忙重新做了一个公司主页。<br>最近那个网站托管的香港主机到期了，由于只是一个静态网站就想找一个免费的空间。查了一下，github pages用的很多，虽然github国内访问可能速度慢，但好在只是简单的静态网站，先试一下。</p>
+<p>接下来记录本次利用github pages搭建静态网站的过程。</p>
+<h2 id="1-创建github项目"><a href="#1-创建github项目" class="headerlink" title="1. 创建github项目"></a>1. 创建github项目</h2><p><img src="https://www.wushifei.com/upload/2021/10/%E5%9B%BE%E7%89%87-23ed2898ec754cab8d6e78ed264abdcc.png" alt="图片.png"></p>
+<h2 id="2-随便上传一个文件"><a href="#2-随便上传一个文件" class="headerlink" title="2. 随便上传一个文件"></a>2. 随便上传一个文件</h2><p>不然接下来设定github pages的时候没有办法选择source。<br><img src="https://www.wushifei.com/upload/2021/10/%E5%9B%BE%E7%89%87-65f7b25cc7e4470b904766e1a358d7d2.png" alt="图片.png"></p>
+<h2 id="3-使能pages"><a href="#3-使能pages" class="headerlink" title="3. 使能pages"></a>3. 使能pages</h2><p><img src="https://www.wushifei.com/upload/2021/10/%E5%9B%BE%E7%89%87-d8d4bd2e216846f0bf9ce27c8bf8eeda.png" alt="图片.png"></p>
+<h2 id="5-将网站的各类文件上传到github"><a href="#5-将网站的各类文件上传到github" class="headerlink" title="5. 将网站的各类文件上传到github"></a>5. 将网站的各类文件上传到github</h2><p>5.1 将库clone到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/pczy/xinpengchengjiaoyu.git</span><br></pre></td></tr></table></figure>
+<p>5.2 无用文件删除，网站文件复制到目标路径</p>
+<p>5.3 上传</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;whole website files upload&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<p>PS：git push如果出现错误“remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.”需要到GitHub的个人信息的Settings/Developer settings/Personal access tokens获取token<br>然后修复现有项的url</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://&lt;your_token&gt;@github.com/&lt;USERNAME&gt;/&lt;REPO&gt;.git</span><br></pre></td></tr></table></figure>
+<p>然后重新执行git push即可。</p>
+<p>到这里已经可以通过<a target="_blank" rel="noopener" href="https://pczy.github.io/xinpengchengjiaoyu/%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99%E4%BA%86%E3%80%82">https://pczy.github.io/xinpengchengjiaoyu/访问网站了。</a></p>
+<h2 id="6-自定义域名设定【进阶】"><a href="#6-自定义域名设定【进阶】" class="headerlink" title="6 自定义域名设定【进阶】"></a>6 自定义域名设定【进阶】</h2><p>这个url只能使用github.io，接下来将自己的域名解析到这个网站。</p>
+<h3 id="6-1-确定ip"><a href="#6-1-确定ip" class="headerlink" title="6.1 确定ip"></a>6.1 确定ip</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ping pczy.github.io</span><br><span class="line"></span><br><span class="line">Pinging pczy.github.io [185.199.110.153] with 32 bytes of data:</span><br><span class="line">Reply from 185.199.110.153: bytes=32 time=122ms TTL=53</span><br><span class="line">Reply from 185.199.110.153: bytes=32 time=122ms TTL=53</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-域名解析"><a href="#6-2-域名解析" class="headerlink" title="6.2 域名解析"></a>6.2 域名解析</h3><p>登录域名管理网站，添加两条解析记录<br><img src="https://www.wushifei.com/upload/2021/10/%E5%9B%BE%E7%89%87-6d7acf7c499e4772aec984d1af0d12c7.png" alt="图片.png"></p>
+<h3 id="6-3-github-pages-Custom-domain-设定"><a href="#6-3-github-pages-Custom-domain-设定" class="headerlink" title="6.3 github pages Custom domain 设定"></a>6.3 github pages Custom domain 设定</h3><p>在库的Settings/Pages/Custom domain中填入自己的域名xinpengchengjiaoyu.com</p>
+<p>到这里就可以通过xinpengchengjiaoyu.com访问在github上面的静态网站了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/10/04/%E5%88%A9%E7%94%A8github%20pages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" data-id="ckvuzyrn200162eqv648m1l8g" data-title="利用github pages托管静态网站" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-标记选中单元格中重复项的第一个VBA代码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/09/14/%E6%A0%87%E8%AE%B0%E9%80%89%E4%B8%AD%E5%8D%95%E5%85%83%E6%A0%BC%E4%B8%AD%E9%87%8D%E5%A4%8D%E9%A1%B9%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAVBA%E4%BB%A3%E7%A0%81/" class="article-date">
+  <time class="dt-published" datetime="2021-09-14T02:37:16.353Z" itemprop="datePublished">2021-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/knowhow/">knowhow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/14/%E6%A0%87%E8%AE%B0%E9%80%89%E4%B8%AD%E5%8D%95%E5%85%83%E6%A0%BC%E4%B8%AD%E9%87%8D%E5%A4%8D%E9%A1%B9%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAVBA%E4%BB%A3%E7%A0%81/">标记选中单元格中重复项的第一个VBA代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://www.wushifei.com/upload/2021/09/%E5%9B%BE%E7%89%87-0aa2e00977ea428e85ad8a3e92525ba9.png" alt="图片.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">Sub 宏1()</span><br><span class="line">&#x27;</span><br><span class="line">&#x27; 宏1 宏</span><br><span class="line">&#x27;</span><br><span class="line"></span><br><span class="line">    On Error Resume Next</span><br><span class="line"></span><br><span class="line">    Dim rn As Range, first As Range</span><br><span class="line"></span><br><span class="line">    Dim ColorIdx As Integer</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">    Set d = CreateObject(&quot;scripting.dictionary&quot;)</span><br><span class="line"></span><br><span class="line">    Selection.Interior.ColorIndex = 2</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">    ColorIdx = 0</span><br><span class="line"></span><br><span class="line">    For Each rn In Selection</span><br><span class="line"></span><br><span class="line">        If rn &lt;&gt; &quot;&quot; Then</span><br><span class="line"></span><br><span class="line">            If d.exists(rn.Value) Then</span><br><span class="line"></span><br><span class="line">                Set first = Range(d(rn.Value))  &#x27;第一次出现的单元格</span><br><span class="line"></span><br><span class="line">                If first.Interior.ColorIndex = 2 Then  &#x27;第一次出现时 未设置过颜色</span><br><span class="line"></span><br><span class="line">                    &#x27;----------------------------------</span><br><span class="line"></span><br><span class="line">                    ColorIdx = (ColorIdx + 1) Mod 56 + 1  &#x27;颜色可选范围：0~56</span><br><span class="line"></span><br><span class="line">                    If ColorIdx = 2 Then ColorIdx = 3</span><br><span class="line"></span><br><span class="line">                    &#x27;----------------------------------</span><br><span class="line"></span><br><span class="line">                    first.Interior.ColorIndex = ColorIdx</span><br><span class="line"></span><br><span class="line">                &#x27;Else</span><br><span class="line"></span><br><span class="line">                   &#x27; ColorIdx = first.Interior.ColorIndex</span><br><span class="line"></span><br><span class="line">                End If</span><br><span class="line"></span><br><span class="line">                &#x27;rn.Interior.ColorIndex = ColorIdx</span><br><span class="line">                </span><br><span class="line"></span><br><span class="line">            Else</span><br><span class="line"></span><br><span class="line">                d.Add rn.Value, rn.Address</span><br><span class="line"></span><br><span class="line">            End If</span><br><span class="line"></span><br><span class="line">        End If</span><br><span class="line"></span><br><span class="line">    Next</span><br><span class="line">    </span><br><span class="line">&#x27;</span><br><span class="line">End Sub</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/09/14/%E6%A0%87%E8%AE%B0%E9%80%89%E4%B8%AD%E5%8D%95%E5%85%83%E6%A0%BC%E4%B8%AD%E9%87%8D%E5%A4%8D%E9%A1%B9%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAVBA%E4%BB%A3%E7%A0%81/" data-id="ckvuzyrnb001s2eqv9ie28250" data-title="标记选中单元格中重复项的第一个VBA代码" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2021-07-09-15-30-27" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/09/2021-07-09-15-30-27/" class="article-date">
+  <time class="dt-published" datetime="2021-07-08T23:30:28.117Z" itemprop="datePublished">2021-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/09/2021-07-09-15-30-27/">2021-07-09-15-30-27</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>环境：<br>Ubuntu 20.04.2 LTS</p>
+<h2 id="CUnit-编译"><a href="#CUnit-编译" class="headerlink" title="CUnit 编译"></a>CUnit 编译</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aclocal</span><br><span class="line">autoheader</span><br><span class="line">autoconf</span><br><span class="line">automake</span><br></pre></td></tr></table></figure>
+<p>如果提示“Command ‘libtoolize’ not found”，先执行‘sudo apt install libtool’安装</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/07/09/2021-07-09-15-30-27/" data-id="ckvuzyrm900002eqvdboqcq9l" data-title="2021-07-09-15-30-27" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-壁画机器人" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/07/%E5%A3%81%E7%94%BB%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="article-date">
+  <time class="dt-published" datetime="2021-07-07T04:13:16.205Z" itemprop="datePublished">2021-07-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/07/%E5%A3%81%E7%94%BB%E6%9C%BA%E5%99%A8%E4%BA%BA/">壁画机器人</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一直觉得会画画的人很厉害，奈何自己不在行，刚好看到一个画画机器人的项目，实践一下。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><p>Software：<br>arduino-1.8.15<br>inkscape（图片转gcode用，非必须）</p>
+</li>
+<li><p>Hardware：<br>ArduinoUNO<br>步进电机+驱动板    2个<br>支架+螺丝+杜邦线</p>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/07/07/%E5%A3%81%E7%94%BB%E6%9C%BA%E5%99%A8%E4%BA%BA/" data-id="ckvuzyrn6001h2eqvc5cdhlkw" data-title="壁画机器人" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-【EtherCAT】 - 概览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/01/%E3%80%90EtherCAT%E3%80%91%20-%20%E6%A6%82%E8%A7%88/" class="article-date">
+  <time class="dt-published" datetime="2021-06-30T16:58:57.336Z" itemprop="datePublished">2021-07-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/01/%E3%80%90EtherCAT%E3%80%91%20-%20%E6%A6%82%E8%A7%88/">【EtherCAT】 - 概览</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>EtherCAT (Ethernet for Control Automation Technology)<br><img src="https://www.wushifei.com/upload/2021/09/testimg-007f0149054a413a8573f8c9cb9c32d3.png" alt="testimg.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/07/01/%E3%80%90EtherCAT%E3%80%91%20-%20%E6%A6%82%E8%A7%88/" data-id="ckvuzyrmz000y2eqv0bk7hjfw" data-title="【EtherCAT】 - 概览" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-搭建DNF服务器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/06/20/%E6%90%AD%E5%BB%BADNF%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2021-06-19T23:50:30.933Z" itemprop="datePublished">2021-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/06/20/%E6%90%AD%E5%BB%BADNF%E6%9C%8D%E5%8A%A1%E5%99%A8/">搭建DNF服务器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近想玩一下DNF，不过新版本已经看不懂了，就想找一下老版本怀念一下。</p>
+<p>在本地虚拟机中安装的单机版，网络版其实也一样，参考下列链接<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/pmcasp/article/details/104339327">https://blog.csdn.net/pmcasp/article/details/104339327</a></p>
+<p>另外：<br>使用GM工具连接数据库时提示连接不可时，可能是因为数据设置为外网不可访问。参考解决方法<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42813765/article/details/82185103">https://blog.csdn.net/weixin_42813765/article/details/82185103</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/06/20/%E6%90%AD%E5%BB%BADNF%E6%9C%8D%E5%8A%A1%E5%99%A8/" data-id="ckvuzyrn9001n2eqv248wd4pb" data-title="搭建DNF服务器" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dnf/" rel="tag">dnf</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iot/">iot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/knowhow/">knowhow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%BB%98%E8%AE%A4%E5%88%86%E7%B1%BB/">默认分类</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL-vscode/" rel="tag">WSL | vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnf/" rel="tag">dnf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-scp/" rel="tag">linux | scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" rel="tag">ppg | 心率测量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/" rel="tag">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps-%E5%9F%9F%E5%90%8D/" rel="tag">vps | 域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" rel="tag">博客 | vps | halo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">树莓派 | jellyfin | 多媒体服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" rel="tag">树莓派 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" rel="tag">树莓派 | svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" rel="tag">树莓派 | 域名 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" rel="tag">比特币 | bitcoin core | vs2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" rel="tag">电脑远程开机 | esp01s | esp8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/VBA/" style="font-size: 10px;">VBA</a> <a href="/tags/WSL-vscode/" style="font-size: 10px;">WSL | vscode</a> <a href="/tags/dnf/" style="font-size: 10px;">dnf</a> <a href="/tags/linux-scp/" style="font-size: 10px;">linux | scp</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" style="font-size: 10px;">ppg | 心率测量</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vps-%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">vps | 域名</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" style="font-size: 10px;">博客 | vps | halo</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">树莓派 | jellyfin | 多媒体服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" style="font-size: 10px;">树莓派 | python</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" style="font-size: 10px;">树莓派 | svn</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" style="font-size: 10px;">树莓派 | 域名 | python</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" style="font-size: 10px;">比特币 | bitcoin core | vs2019</a> <a href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" style="font-size: 10px;">电脑远程开机 | esp01s | esp8266</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
     </div>
   </div>
 
@@ -154,6 +649,22 @@
         
           <li>
             <a href="/2021/11/07/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/07/%E5%9C%A8%E5%90%8C%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E7%9A%84ssh%20key%E3%80%90ssh%20key%20already%20in%20use%20github%E3%80%91/">在同一台电脑上管理多个github账号的ssh key【ssh key already in use github】</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/07/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BBhalo%E2%86%92hexo/">博客迁移halo→hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/06/%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E5%92%8CDDNS/">配置二级域名和DDNS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/04/%E5%88%A9%E7%94%A8github%20pages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/">利用github pages托管静态网站</a>
           </li>
         
       </ul>

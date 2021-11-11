@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>光学心率测量原理[转载] | 程序员记事本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="转载自:http:&#x2F;&#x2F;blog.csdn.net&#x2F;richard_liujh&#x2F;article&#x2F;details&#x2F;49615395 简介：在这个什么都要和“智能”串联的年代，除了我们司空见款的手机外也就是一些智能手表和手环之类的穿戴设备了。这些智能穿戴设备集成了很多的传感器，由于脉搏或者心率是生命体征的重要参数之一，所以心率率测量可算是高端入门产品必备的一个技能，正好最近有机会好好研究心率测量的技术，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="光学心率测量原理[转载]">
+<meta property="og:url" content="https://wushifei.com/2021/04/14/%E5%85%89%E5%AD%A6%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F%E5%8E%9F%E7%90%86[%E8%BD%AC%E8%BD%BD]/index.html">
+<meta property="og:site_name" content="程序员记事本">
+<meta property="og:description" content="转载自:http:&#x2F;&#x2F;blog.csdn.net&#x2F;richard_liujh&#x2F;article&#x2F;details&#x2F;49615395 简介：在这个什么都要和“智能”串联的年代，除了我们司空见款的手机外也就是一些智能手表和手环之类的穿戴设备了。这些智能穿戴设备集成了很多的传感器，由于脉搏或者心率是生命体征的重要参数之一，所以心率率测量可算是高端入门产品必备的一个技能，正好最近有机会好好研究心率测量的技术，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-1a73041cbc4148d697703159fcf869dd.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-040e98e4353649fca782581a9042ab64.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-86055211d3c947ac81aa4547e31672d8.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-b0c2202d326c4fc7a877f49a7bfb5fc3.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-37d68e5ede92472bb8897eb5888e21f6.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-6e90d9b6fa3e4948b109eb170d4ba0a5.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-07dd5b869d164d34b5a2e203d3bfb09a.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-3448a8494b014c79b419eb9102154c0f.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-c6ed04020b9e437280c8d4c7b7abd562.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-987b05e249b6443687d80168993f45d3.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-3bf7a8a6af2a4ffa8abfab61bf669290.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-fe224317b24d425c960f712d09401322.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-36148d33e83d40c29c1c75b0f8fe726d.png">
+<meta property="og:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-8266c33e94ea43f3a7fde7fbcd81d9ad.png">
+<meta property="article:published_time" content="2021-04-13T17:37:54.760Z">
+<meta property="article:modified_time" content="2021-04-13T17:43:44.596Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ppg | 心率测量">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-1a73041cbc4148d697703159fcf869dd.png">
+  
+    <link rel="alternate" href="/atom.xml" title="程序员记事本" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程序员记事本</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wushifei.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-光学心率测量原理[转载]" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/14/%E5%85%89%E5%AD%A6%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F%E5%8E%9F%E7%90%86%5B%E8%BD%AC%E8%BD%BD%5D/" class="article-date">
+  <time class="dt-published" datetime="2021-04-13T17:37:54.760Z" itemprop="datePublished">2021-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iot/">iot</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      光学心率测量原理[转载]
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>转载自:<a target="_blank" rel="noopener" href="http://blog.csdn.net/richard_liujh/article/details/49615395">http://blog.csdn.net/richard_liujh/article/details/49615395</a></p>
+<p>简介：<br>在这个什么都要和“智能”串联的年代，除了我们司空见款的手机外也就是一些智能手表和手环之类的穿戴设备了。这些智能穿戴设备集成了很多的传感器，由于脉搏或者心率是生命体征的重要参数之一，所以心率率测量可算是高端入门产品必备的一个技能，正好最近有机会好好研究心率测量的技术，所以趁热打铁总结一下光学测量心率的相关知识。</p>
+<p>在网上搜集了很多资料，目前心率测量有以下几种传感器技术（仅供参考）</p>
+<ol>
+<li><p>心电ECG</p>
+</li>
+<li><p>光电容积脉搏波描记法PPG </p>
+</li>
+<li><p>生物阻抗 bioimpedance</p>
+</li>
+<li><p>摄像头Camera RGB 、wifi等技术</p>
+</li>
+</ol>
+<p>在上述的几种方法中，最被人们熟悉的应该就是心电图。在医疗领域，通常使用心电图（ECG）测量生理电信号来实现心率和心脏活动的检测。但是由于测量ECG信号，常常要在身体多个部位连接传感器电极，在胸部和四肢之间最多可以连接10个电极。ECG信号虽然精准并且信息丰富，但是考虑到穿戴设备的便携性和功能简单所以并没有在穿戴设备上广泛采用ECG技术。目前情况ECG还是在一些专业领域里面使用例如医院、体育等方面的研究。</p>
+<p>第二种光电容积脉搏波描记法，这个名字读起来实在是高端，其实说简单点就是利用光测量脉搏的一种技术。这种技术目前被广泛应用，本文也是主要介绍这种技术。</p>
+<p>目前市场上能看到采用这种技术的穿戴设备就有：AppleWatch、三星 Galaxy Gear S2、Moto 360、Microsoft Band 等….（其他厂家就省略了）。<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-1a73041cbc4148d697703159fcf869dd.png" alt="图片.png"></p>
+<p>第三种生物阻抗传感器测量方法，目前市场上看到的好像只有Jawbone 的UP3了， 对于此技术网上的资料特别的少。不过通过亲身体验试戴JawboneUP3，感觉这种技术应该比光学测心率的技术难度大但是应该更精准更可靠。最后的Camera RGB和wifi都是是MIT研究出来的新技术，看起来都非常高端，MIT威武啊。其中一个是通过我们手机的摄像头就能检测出人体的体征变化，这个技术非常有意思并且也很高端，感兴趣的可以看视频介绍。另一个则是通过我们家里的wifi信号就能测，也甚是高端。当然这两种还没有看到上市的产品所以就不多说了。</p>
+<p>光电容积脉搏波描记法PPG </p>
+<p>光学心率传感器，如果带过上述那些智能手表或者智能手环的朋友来说也不算稀奇的事情。就拿AppleWatch来说，测量心率时底部的表盘会发出绿色的灯光，并且测量的时候手腕最好保持不动否侧会影响测量结果。接下来将详细介绍光学心率测量的原理。</p>
+<p>如下两张图是光学心率传感器。图a是LED没有发光的时候中间是一个光敏二极管，图b是传感器的LED发光的时候。<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-040e98e4353649fca782581a9042ab64.png" alt="图片.png"><br>图a</p>
+<p><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-86055211d3c947ac81aa4547e31672d8.png" alt="图片.png"><br>图b</p>
+<p>那么为什么通过LED灯发光就能测量心率呢？</p>
+<p>当LED光射向皮肤，透过皮肤组织反射回的光被光敏传感器接受并转换成电信号再经过AD转换成数字信号，简化过程：光–&gt; 电 –&gt; 数字信号<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-b0c2202d326c4fc7a877f49a7bfb5fc3.png" alt="图片.png"></p>
+<p>为什么大多数传感器都是采用的绿光呢？</p>
+<p>我们先看看光谱的特点，从紫外线到红外线的波长是越来越长的。<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-37d68e5ede92472bb8897eb5888e21f6.png" alt="图片.png"></p>
+<p>之所以选择绿光作为光源是考虑到一下·几个特点：</p>
+<ol>
+<li>皮肤的黑色素会吸收大量波长较短的波</li>
+<li>皮肤上的水份也会吸收大量的UV和IR部分的光</li>
+<li>进入皮肤组织的绿光(500nm)– 黄光(600nm)大部分会被红细胞吸收</li>
+<li>红光和接近IR的光相比其他波长的光更容易穿过皮肤组织</li>
+<li>血液要比其他组织吸收更多的光</li>
+<li>相比红光，绿（绿-黄）光能被氧合血红蛋白和脱氧血红蛋白吸收</li>
+</ol>
+<p>总体来说，绿光– 红光能作为测量光源。早起多数采用红光为光源，随着进一步的研究和对比，绿光作为光源得到的信号更好，信噪比也比其他光源好些，所以现在大部分穿戴设备采用绿光为光源。但是考虑到皮肤情况的不用（肤色、汗水），高端产品会根据情况自动使用换绿光、红光和IR多种光源。</p>
+<p>虽然知道了上面的几个特点，但是还不足以弄清楚为什么通过光照就能测出心率、血氧等参数呢？</p>
+<p>下图就解释了核心原理<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-6e90d9b6fa3e4948b109eb170d4ba0a5.png" alt="图片.png"></p>
+<p>当光照透过皮肤组织然后再反射到光敏传感器时光照有一定的衰减的。像肌肉、骨骼、静脉和其他连接组织等等对光的吸收是基本不变的（前提是测量部位没有大幅度的运动），但是血液不同，由于动脉里有血液的流动，那么对光的吸收自然也有所变化。当我们把光转换成电信号时，正是由于动脉对光的吸收有变化而其他组织对光的吸收基本不变，得到的信号就可以分为直流DC信号和交流AC信号。提取其中的AC信号，就能反应出血液流动的特点。我们把这种技术叫做光电容积脉搏波描记法PPG。</p>
+<p>下图是PPG信号和ECG信号的对比<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-07dd5b869d164d34b5a2e203d3bfb09a.png" alt="图片.png"></p>
+<p>实际测量手指的PPG信号如下：<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-3448a8494b014c79b419eb9102154c0f.png" alt="图片.png"></p>
+<p>所以，只要测得到的PPG信号比较理想算出心率也不算什么难事。但是事实总是残酷的，由于测量部位的移动、自然光、日光灯等等其他的干扰，最终测到的信号可能是下面的这种，所以要通过很多方法进行滤波处理<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-c6ed04020b9e437280c8d4c7b7abd562.png" alt="图片.png"></p>
+<p>对于PPG信号的处理，目前我知道的有两种方法。一种是时域分析，即算出一定时间内PPG信号的波峰个数，另一种是通过对PPG信号进行FFT变换得到频域的特点。<br>时域方法：</p>
+<p>通过对原始的{PPG信号进行滤波处理，得到一定时间内的波峰个数，然后既可算出心率值<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-987b05e249b6443687d80168993f45d3.png" alt="图片.png"></p>
+<p>假设连续采样5秒的时间，在5s内的波峰个数为N，那么心率就是N*12 （这个相信大家都懂，就跟把脉一样~）</p>
+<p>频域分析：</p>
+<p>上面分析过，我们把血液流动对光吸收转变成了AC信号，如果对于进行FFT变换，那么就能看到频域的特点。如下图就是对PPG信号的FFT转变<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-3bf7a8a6af2a4ffa8abfab61bf669290.png" alt="图片.png"></p>
+<p>上图中的频域图，0Hz的信号很强，这部分是骨骼、肌肉等组织的DC信号，在1Hz附近有个相对比较突出的信号就是血液流动转变的AC信号。假设测得到的频率f = 1.2Hz</p>
+<p>那么心率HeartRate  HR = f x60 = 1.2 x 60 = 72</p>
+<p>最后再简单提一下血氧的测量，相比心率血氧测量难度较大而且精度不算太高。测量血氧的原理图下图所示<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-fe224317b24d425c960f712d09401322.png" alt="图片.png"></p>
+<p>由于血液中含有的氧合血红蛋白HbO2和血红蛋白Hb存在一定的比例，简单说也就是含氧量吧。上面的图表示了氧合血红蛋白HbO2和血红蛋白Hb对波长600<del>1000nm的光吸收特性，从图中可以看出上600</del>800nm间Hb的吸收系数更高，800<del>1000之间HbO2的吸收系数更高。所以可以利用红光（600</del>800nm）和接近IR（800~1000nm）的光分别检测HbO2和Hb的PPG信号，然后通过程序处理算出相应的比值，这样就得到了血氧值。</p>
+<p>但是由于光源不同，直接利用红光和接近IR的光进行信号对比是不可靠的，因为红光和IR透过皮肤组织也会产生不同的吸收。下图是红光和IR透过皮肤的原始信号示意图<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-36148d33e83d40c29c1c75b0f8fe726d.png" alt="图片.png"></p>
+<p>上面分析说过，DC部分是光透过皮肤组织转换成的直流信号，AC是血液流动产生转换成的交流信号。由于皮肤组织对红光和IR的吸收程度不同，DC部分自然也就不一样。为了能共“公平对待”两种光源的PPG信号，所以需要对原始信号处理一下。下图示意了处理后的信号（DC部分相等）<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-8266c33e94ea43f3a7fde7fbcd81d9ad.png" alt="图片.png"></p>
+<p>通过一定的比例计算，公平对待Red和IR的PPG信号。这样计算出来的Hb和HbO2比例才可靠。</p>
+<p>本人水平有限，如有错误欢迎大家指出错误，相互学习！！</p>
+<p>本文章参考文献：</p>
+<ol>
+<li><p>Dae-Geun Jang, Sangjun Park, and Minsoo Hahn    A Real-Time Pulse Peak Detection Algorithm for the Photoplethysmogram </p>
+</li>
+<li><p>Development of a Signal Processing Library for Extraction of SpO 2 , HR, HRV, and RR from Photoplethysmographic Waveforms </p>
+</li>
+<li><p>S.  K.  Mitra,  Digital  Signal  Processing:  A  Computer-Based Approach, 3rd ed., New York, USA: McGraw-Hill</p>
+</li>
+<li><p>Y. K. Qawqzeh, M. B. I. Reaz, M. A. M. Ali   The analysis of PPG contour in the assessment of atherosclerosis for erectile dysfunction subjects </p>
+</li>
+<li><p>Telecommunications Institute, Military University of Technology</p>
+</li>
+<li><p>Kaliskiego 2, 00-908 Warsaw, Poland ISSN 2079-9292 Wearable Photoplethysmographic Sensors—Past and Present </p>
+</li>
+<li><p>Military Institute of Aviation Medicine, Krasińskiego 54, 01-455 Warsaw, Poland</p>
+</li>
+<li><p>基于光电容积脉搏波的亚临床动脉弹性功能研究</p>
+</li>
+<li><p>基于PPG的心率和呼吸频率的测量研究_马俊领</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/04/14/%E5%85%89%E5%AD%A6%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F%E5%8E%9F%E7%90%86[%E8%BD%AC%E8%BD%BD]/" data-id="ckvuzyrn100112eqvbncjejs8" data-title="光学心率测量原理[转载]" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" rel="tag">ppg | 心率测量</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/15/%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6%E7%9C%8B%E4%B8%8D%E5%88%B0%E7%AA%97%E5%8F%A3%E5%8F%AA%E5%9C%A8%E4%BB%BB%E5%8A%A1%E6%A0%8F%E6%98%BE%E7%A4%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          打开软件看不到窗口只在任务栏显示
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/14/%E4%BB%A5%E5%90%8E%E6%9C%89%E5%BF%85%E8%A6%81%E8%BD%AC%E8%BD%BD%E4%B8%80%E4%BA%9B%E6%96%87%E7%AB%A0%E4%BA%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">以后有必要转载一些文章了</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iot/">iot</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/knowhow/">knowhow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%BB%98%E8%AE%A4%E5%88%86%E7%B1%BB/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL-vscode/" rel="tag">WSL | vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnf/" rel="tag">dnf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-scp/" rel="tag">linux | scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" rel="tag">ppg | 心率测量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/" rel="tag">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps-%E5%9F%9F%E5%90%8D/" rel="tag">vps | 域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" rel="tag">博客 | vps | halo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">树莓派 | jellyfin | 多媒体服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" rel="tag">树莓派 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" rel="tag">树莓派 | svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" rel="tag">树莓派 | 域名 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" rel="tag">比特币 | bitcoin core | vs2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" rel="tag">电脑远程开机 | esp01s | esp8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/VBA/" style="font-size: 10px;">VBA</a> <a href="/tags/WSL-vscode/" style="font-size: 10px;">WSL | vscode</a> <a href="/tags/dnf/" style="font-size: 10px;">dnf</a> <a href="/tags/linux-scp/" style="font-size: 10px;">linux | scp</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" style="font-size: 10px;">ppg | 心率测量</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vps-%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">vps | 域名</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" style="font-size: 10px;">博客 | vps | halo</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">树莓派 | jellyfin | 多媒体服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" style="font-size: 10px;">树莓派 | python</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" style="font-size: 10px;">树莓派 | svn</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" style="font-size: 10px;">树莓派 | 域名 | python</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" style="font-size: 10px;">比特币 | bitcoin core | vs2019</a> <a href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" style="font-size: 10px;">电脑远程开机 | esp01s | esp8266</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/07/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/07/%E5%9C%A8%E5%90%8C%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E7%9A%84ssh%20key%E3%80%90ssh%20key%20already%20in%20use%20github%E3%80%91/">在同一台电脑上管理多个github账号的ssh key【ssh key already in use github】</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/07/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BBhalo%E2%86%92hexo/">博客迁移halo→hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/06/%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E5%92%8CDDNS/">配置二级域名和DDNS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/04/%E5%88%A9%E7%94%A8github%20pages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/">利用github pages托管静态网站</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
