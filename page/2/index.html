@@ -72,291 +72,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-光学心率测量原理[转载]" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/14/%E5%85%89%E5%AD%A6%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F%E5%8E%9F%E7%90%86%5B%E8%BD%AC%E8%BD%BD%5D/" class="article-date">
-  <time class="dt-published" datetime="2021-04-13T17:37:54.760Z" itemprop="datePublished">2021-04-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iot/">iot</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/14/%E5%85%89%E5%AD%A6%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F%E5%8E%9F%E7%90%86%5B%E8%BD%AC%E8%BD%BD%5D/">光学心率测量原理[转载]</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>转载自:<a target="_blank" rel="noopener" href="http://blog.csdn.net/richard_liujh/article/details/49615395">http://blog.csdn.net/richard_liujh/article/details/49615395</a></p>
-<p>简介：<br>在这个什么都要和“智能”串联的年代，除了我们司空见款的手机外也就是一些智能手表和手环之类的穿戴设备了。这些智能穿戴设备集成了很多的传感器，由于脉搏或者心率是生命体征的重要参数之一，所以心率率测量可算是高端入门产品必备的一个技能，正好最近有机会好好研究心率测量的技术，所以趁热打铁总结一下光学测量心率的相关知识。</p>
-<p>在网上搜集了很多资料，目前心率测量有以下几种传感器技术（仅供参考）</p>
-<ol>
-<li><p>心电ECG</p>
-</li>
-<li><p>光电容积脉搏波描记法PPG </p>
-</li>
-<li><p>生物阻抗 bioimpedance</p>
-</li>
-<li><p>摄像头Camera RGB 、wifi等技术</p>
-</li>
-</ol>
-<p>在上述的几种方法中，最被人们熟悉的应该就是心电图。在医疗领域，通常使用心电图（ECG）测量生理电信号来实现心率和心脏活动的检测。但是由于测量ECG信号，常常要在身体多个部位连接传感器电极，在胸部和四肢之间最多可以连接10个电极。ECG信号虽然精准并且信息丰富，但是考虑到穿戴设备的便携性和功能简单所以并没有在穿戴设备上广泛采用ECG技术。目前情况ECG还是在一些专业领域里面使用例如医院、体育等方面的研究。</p>
-<p>第二种光电容积脉搏波描记法，这个名字读起来实在是高端，其实说简单点就是利用光测量脉搏的一种技术。这种技术目前被广泛应用，本文也是主要介绍这种技术。</p>
-<p>目前市场上能看到采用这种技术的穿戴设备就有：AppleWatch、三星 Galaxy Gear S2、Moto 360、Microsoft Band 等….（其他厂家就省略了）。<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-1a73041cbc4148d697703159fcf869dd.png" alt="图片.png"></p>
-<p>第三种生物阻抗传感器测量方法，目前市场上看到的好像只有Jawbone 的UP3了， 对于此技术网上的资料特别的少。不过通过亲身体验试戴JawboneUP3，感觉这种技术应该比光学测心率的技术难度大但是应该更精准更可靠。最后的Camera RGB和wifi都是是MIT研究出来的新技术，看起来都非常高端，MIT威武啊。其中一个是通过我们手机的摄像头就能检测出人体的体征变化，这个技术非常有意思并且也很高端，感兴趣的可以看视频介绍。另一个则是通过我们家里的wifi信号就能测，也甚是高端。当然这两种还没有看到上市的产品所以就不多说了。</p>
-<p>光电容积脉搏波描记法PPG </p>
-<p>光学心率传感器，如果带过上述那些智能手表或者智能手环的朋友来说也不算稀奇的事情。就拿AppleWatch来说，测量心率时底部的表盘会发出绿色的灯光，并且测量的时候手腕最好保持不动否侧会影响测量结果。接下来将详细介绍光学心率测量的原理。</p>
-<p>如下两张图是光学心率传感器。图a是LED没有发光的时候中间是一个光敏二极管，图b是传感器的LED发光的时候。<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-040e98e4353649fca782581a9042ab64.png" alt="图片.png"><br>图a</p>
-<p><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-86055211d3c947ac81aa4547e31672d8.png" alt="图片.png"><br>图b</p>
-<p>那么为什么通过LED灯发光就能测量心率呢？</p>
-<p>当LED光射向皮肤，透过皮肤组织反射回的光被光敏传感器接受并转换成电信号再经过AD转换成数字信号，简化过程：光–&gt; 电 –&gt; 数字信号<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-b0c2202d326c4fc7a877f49a7bfb5fc3.png" alt="图片.png"></p>
-<p>为什么大多数传感器都是采用的绿光呢？</p>
-<p>我们先看看光谱的特点，从紫外线到红外线的波长是越来越长的。<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-37d68e5ede92472bb8897eb5888e21f6.png" alt="图片.png"></p>
-<p>之所以选择绿光作为光源是考虑到一下·几个特点：</p>
-<ol>
-<li>皮肤的黑色素会吸收大量波长较短的波</li>
-<li>皮肤上的水份也会吸收大量的UV和IR部分的光</li>
-<li>进入皮肤组织的绿光(500nm)– 黄光(600nm)大部分会被红细胞吸收</li>
-<li>红光和接近IR的光相比其他波长的光更容易穿过皮肤组织</li>
-<li>血液要比其他组织吸收更多的光</li>
-<li>相比红光，绿（绿-黄）光能被氧合血红蛋白和脱氧血红蛋白吸收</li>
-</ol>
-<p>总体来说，绿光– 红光能作为测量光源。早起多数采用红光为光源，随着进一步的研究和对比，绿光作为光源得到的信号更好，信噪比也比其他光源好些，所以现在大部分穿戴设备采用绿光为光源。但是考虑到皮肤情况的不用（肤色、汗水），高端产品会根据情况自动使用换绿光、红光和IR多种光源。</p>
-<p>虽然知道了上面的几个特点，但是还不足以弄清楚为什么通过光照就能测出心率、血氧等参数呢？</p>
-<p>下图就解释了核心原理<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-6e90d9b6fa3e4948b109eb170d4ba0a5.png" alt="图片.png"></p>
-<p>当光照透过皮肤组织然后再反射到光敏传感器时光照有一定的衰减的。像肌肉、骨骼、静脉和其他连接组织等等对光的吸收是基本不变的（前提是测量部位没有大幅度的运动），但是血液不同，由于动脉里有血液的流动，那么对光的吸收自然也有所变化。当我们把光转换成电信号时，正是由于动脉对光的吸收有变化而其他组织对光的吸收基本不变，得到的信号就可以分为直流DC信号和交流AC信号。提取其中的AC信号，就能反应出血液流动的特点。我们把这种技术叫做光电容积脉搏波描记法PPG。</p>
-<p>下图是PPG信号和ECG信号的对比<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-07dd5b869d164d34b5a2e203d3bfb09a.png" alt="图片.png"></p>
-<p>实际测量手指的PPG信号如下：<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-3448a8494b014c79b419eb9102154c0f.png" alt="图片.png"></p>
-<p>所以，只要测得到的PPG信号比较理想算出心率也不算什么难事。但是事实总是残酷的，由于测量部位的移动、自然光、日光灯等等其他的干扰，最终测到的信号可能是下面的这种，所以要通过很多方法进行滤波处理<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-c6ed04020b9e437280c8d4c7b7abd562.png" alt="图片.png"></p>
-<p>对于PPG信号的处理，目前我知道的有两种方法。一种是时域分析，即算出一定时间内PPG信号的波峰个数，另一种是通过对PPG信号进行FFT变换得到频域的特点。<br>时域方法：</p>
-<p>通过对原始的{PPG信号进行滤波处理，得到一定时间内的波峰个数，然后既可算出心率值<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-987b05e249b6443687d80168993f45d3.png" alt="图片.png"></p>
-<p>假设连续采样5秒的时间，在5s内的波峰个数为N，那么心率就是N*12 （这个相信大家都懂，就跟把脉一样~）</p>
-<p>频域分析：</p>
-<p>上面分析过，我们把血液流动对光吸收转变成了AC信号，如果对于进行FFT变换，那么就能看到频域的特点。如下图就是对PPG信号的FFT转变<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-3bf7a8a6af2a4ffa8abfab61bf669290.png" alt="图片.png"></p>
-<p>上图中的频域图，0Hz的信号很强，这部分是骨骼、肌肉等组织的DC信号，在1Hz附近有个相对比较突出的信号就是血液流动转变的AC信号。假设测得到的频率f = 1.2Hz</p>
-<p>那么心率HeartRate  HR = f x60 = 1.2 x 60 = 72</p>
-<p>最后再简单提一下血氧的测量，相比心率血氧测量难度较大而且精度不算太高。测量血氧的原理图下图所示<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-fe224317b24d425c960f712d09401322.png" alt="图片.png"></p>
-<p>由于血液中含有的氧合血红蛋白HbO2和血红蛋白Hb存在一定的比例，简单说也就是含氧量吧。上面的图表示了氧合血红蛋白HbO2和血红蛋白Hb对波长600<del>1000nm的光吸收特性，从图中可以看出上600</del>800nm间Hb的吸收系数更高，800<del>1000之间HbO2的吸收系数更高。所以可以利用红光（600</del>800nm）和接近IR（800~1000nm）的光分别检测HbO2和Hb的PPG信号，然后通过程序处理算出相应的比值，这样就得到了血氧值。</p>
-<p>但是由于光源不同，直接利用红光和接近IR的光进行信号对比是不可靠的，因为红光和IR透过皮肤组织也会产生不同的吸收。下图是红光和IR透过皮肤的原始信号示意图<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-36148d33e83d40c29c1c75b0f8fe726d.png" alt="图片.png"></p>
-<p>上面分析说过，DC部分是光透过皮肤组织转换成的直流信号，AC是血液流动产生转换成的交流信号。由于皮肤组织对红光和IR的吸收程度不同，DC部分自然也就不一样。为了能共“公平对待”两种光源的PPG信号，所以需要对原始信号处理一下。下图示意了处理后的信号（DC部分相等）<br><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-8266c33e94ea43f3a7fde7fbcd81d9ad.png" alt="图片.png"></p>
-<p>通过一定的比例计算，公平对待Red和IR的PPG信号。这样计算出来的Hb和HbO2比例才可靠。</p>
-<p>本人水平有限，如有错误欢迎大家指出错误，相互学习！！</p>
-<p>本文章参考文献：</p>
-<ol>
-<li><p>Dae-Geun Jang, Sangjun Park, and Minsoo Hahn    A Real-Time Pulse Peak Detection Algorithm for the Photoplethysmogram </p>
-</li>
-<li><p>Development of a Signal Processing Library for Extraction of SpO 2 , HR, HRV, and RR from Photoplethysmographic Waveforms </p>
-</li>
-<li><p>S.  K.  Mitra,  Digital  Signal  Processing:  A  Computer-Based Approach, 3rd ed., New York, USA: McGraw-Hill</p>
-</li>
-<li><p>Y. K. Qawqzeh, M. B. I. Reaz, M. A. M. Ali   The analysis of PPG contour in the assessment of atherosclerosis for erectile dysfunction subjects </p>
-</li>
-<li><p>Telecommunications Institute, Military University of Technology</p>
-</li>
-<li><p>Kaliskiego 2, 00-908 Warsaw, Poland ISSN 2079-9292 Wearable Photoplethysmographic Sensors—Past and Present </p>
-</li>
-<li><p>Military Institute of Aviation Medicine, Krasińskiego 54, 01-455 Warsaw, Poland</p>
-</li>
-<li><p>基于光电容积脉搏波的亚临床动脉弹性功能研究</p>
-</li>
-<li><p>基于PPG的心率和呼吸频率的测量研究_马俊领</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/04/14/%E5%85%89%E5%AD%A6%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F%E5%8E%9F%E7%90%86[%E8%BD%AC%E8%BD%BD]/" data-id="ckvv0bqvp00144oqv25j421kq" data-title="光学心率测量原理[转载]" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" rel="tag">ppg | 心率测量</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-以后有必要转载一些文章了" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/14/%E4%BB%A5%E5%90%8E%E6%9C%89%E5%BF%85%E8%A6%81%E8%BD%AC%E8%BD%BD%E4%B8%80%E4%BA%9B%E6%96%87%E7%AB%A0%E4%BA%86/" class="article-date">
-  <time class="dt-published" datetime="2021-04-13T17:27:33.852Z" itemprop="datePublished">2021-04-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%BB%98%E8%AE%A4%E5%88%86%E7%B1%BB/">默认分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/14/%E4%BB%A5%E5%90%8E%E6%9C%89%E5%BF%85%E8%A6%81%E8%BD%AC%E8%BD%BD%E4%B8%80%E4%BA%9B%E6%96%87%E7%AB%A0%E4%BA%86/">以后有必要转载一些文章了</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>由于最近经常会碰到下面这种情况，所以以后会转载一些对自己有用的文章以免用到时候不能访问。。。</p>
-<p><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-0d977b455e9948d3a2c589fb8cc42ecc.png" alt="图片.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/04/14/%E4%BB%A5%E5%90%8E%E6%9C%89%E5%BF%85%E8%A6%81%E8%BD%AC%E8%BD%BD%E4%B8%80%E4%BA%9B%E6%96%87%E7%AB%A0%E4%BA%86/" data-id="ckvv0bqvj000m4oqv59x9ajp0" data-title="以后有必要转载一些文章了" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-公网IP变化时邮件通知" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/09/%E5%85%AC%E7%BD%91IP%E5%8F%98%E5%8C%96%E6%97%B6%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5/" class="article-date">
-  <time class="dt-published" datetime="2021-04-08T21:09:00.188Z" itemprop="datePublished">2021-04-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/knowhow/">knowhow</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/09/%E5%85%AC%E7%BD%91IP%E5%8F%98%E5%8C%96%E6%97%B6%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5/">公网IP变化时邮件通知</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>本来使用了ddns，但是免费的ddns有时候会失败。<br>所以加了一个邮件通知作为双保险。</p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>树莓派<br>python</p>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
-<li>公网ip获取</li>
-<li>与上次ip比较</li>
-<li>邮件通知</li>
-<li>定时执行</li>
-</ul>
-<h2 id="公网ip获取"><a href="#公网ip获取" class="headerlink" title="公网ip获取"></a>公网ip获取</h2><p>有很多网站能够返回公网ip，这里使用一个最简洁的网站 whatismyip.akamai.com 。<br>用python实现的代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">url = &#x27;http://whatismyip.akamai.com/&#x27;</span><br><span class="line">def get_ip():</span><br><span class="line">    response = request.urlopen(url)</span><br><span class="line">    html = response.read()</span><br><span class="line">    ip = html.decode(&quot;utf-8&quot;)</span><br><span class="line">    return ip</span><br></pre></td></tr></table></figure>
-
-<h2 id="与上次ip比较"><a href="#与上次ip比较" class="headerlink" title="与上次ip比较"></a>与上次ip比较</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">nowip = get_ip() # 获取当前公网IP</span><br><span class="line"></span><br><span class="line">ip=&#x27;&#x27;</span><br><span class="line"># 读方式打开文件，取得ip</span><br><span class="line">try:</span><br><span class="line">    with open(fip, &#x27;r&#x27;) as f:</span><br><span class="line">        ip = f.read()</span><br><span class="line">except IOError:</span><br><span class="line">    print(&#x27;File open error&#x27;)</span><br><span class="line"></span><br><span class="line">if ip == nowip: # 与上次ip相同时退出</span><br><span class="line">    pass</span><br><span class="line">else:           # 与上次ip不同时</span><br><span class="line">    content = mail_info.get(&#x27;content&#x27;).format(nowip, ip)</span><br><span class="line">    send_message(content)</span><br><span class="line"></span><br><span class="line">    # 读写方式打开文件，如果文件不存在，新建，如果文件存在，覆盖写</span><br><span class="line">    with open(fip,&#x27;w+&#x27;) as f:</span><br><span class="line">        f.write(nowip)</span><br></pre></td></tr></table></figure>
-
-<h2 id="邮件通知"><a href="#邮件通知" class="headerlink" title="邮件通知"></a>邮件通知</h2><p>注意现在（2021/4/9）邮箱的密码并不是登录密码，而是16位验证码。验证码的取得方法参照<a target="_blank" rel="noopener" href="https://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256">QQ邮箱帮助中心</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mail_info = &#123;</span><br><span class="line">    &#x27;recv_address&#x27;: &#x27;XXX@126.com&#x27;,</span><br><span class="line">    &#x27;sender_name&#x27;: &#x27;XXX@qq.com&#x27;,</span><br><span class="line">    &#x27;sender_pwd&#x27;: &#x27;XXXX&#x27;, #QQ邮箱使用16位验证码，而非登录密码</span><br><span class="line">    &#x27;smtp_server&#x27;: &#x27;smtp.qq.com&#x27;,</span><br><span class="line">    &#x27;subject&#x27;: &#x27;IP信息已更新&#x27;,</span><br><span class="line">    &#x27;content&#x27;: &#x27;当前公网IP信息: &#123;&#125;\n前回IP：&#123;&#125;&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">def send_message(content):</span><br><span class="line">    # 设置发送邮件的内容</span><br><span class="line">    msg = MIMEText(content, &#x27;plain&#x27;, &#x27;utf-8&#x27;)</span><br><span class="line">    msg[&#x27;From&#x27;] = Header(mail_info.get(&#x27;sender_name&#x27;))</span><br><span class="line">    msg[&#x27;Subject&#x27;] = Header(mail_info.get(&#x27;subject&#x27;), &#x27;utf-8&#x27;)</span><br><span class="line">    msg[&#x27;To&#x27;] = Header(mail_info.get(&#x27;recv_address&#x27;))</span><br><span class="line"></span><br><span class="line">    # 发送邮件</span><br><span class="line">    smtp = smtplib.SMTP()</span><br><span class="line">    smtp.connect(mail_info[&#x27;smtp_server&#x27;])</span><br><span class="line">    smtp.login(mail_info[&#x27;sender_name&#x27;], mail_info[&#x27;sender_pwd&#x27;])</span><br><span class="line">    smtp.sendmail(mail_info[&#x27;sender_name&#x27;], mail_info[&#x27;recv_address&#x27;], msg.as_string())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>完整代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"># coding: utf-8</span><br><span class="line">from urllib import request</span><br><span class="line">import smtplib</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.header import Header</span><br><span class="line"></span><br><span class="line">url = &#x27;http://whatismyip.akamai.com/&#x27;</span><br><span class="line">fip = &#x27;ip.txt&#x27;</span><br><span class="line"></span><br><span class="line">mail_info = &#123;</span><br><span class="line">    &#x27;recv_address&#x27;: &#x27;XXX@126.com&#x27;,</span><br><span class="line">    &#x27;sender_name&#x27;: &#x27;XXX@qq.com&#x27;,</span><br><span class="line">    &#x27;sender_pwd&#x27;: &#x27;XXXX&#x27;, #QQ邮箱使用16位验证码，而非登录密码</span><br><span class="line">    &#x27;smtp_server&#x27;: &#x27;smtp.qq.com&#x27;,</span><br><span class="line">    &#x27;subject&#x27;: &#x27;IP信息已更新&#x27;,</span><br><span class="line">    &#x27;content&#x27;: &#x27;当前公网IP信息: &#123;&#125;\n前回IP：&#123;&#125;&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def get_ip():</span><br><span class="line">    response = request.urlopen(url)</span><br><span class="line">    html = response.read()</span><br><span class="line">    ip = html.decode(&quot;utf-8&quot;)</span><br><span class="line">    return ip</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def send_message(content):</span><br><span class="line">    # 设置发送邮件的内容</span><br><span class="line">    msg = MIMEText(content, &#x27;plain&#x27;, &#x27;utf-8&#x27;)</span><br><span class="line">    msg[&#x27;From&#x27;] = Header(mail_info.get(&#x27;sender_name&#x27;))</span><br><span class="line">    msg[&#x27;Subject&#x27;] = Header(mail_info.get(&#x27;subject&#x27;), &#x27;utf-8&#x27;)</span><br><span class="line">    msg[&#x27;To&#x27;] = Header(mail_info.get(&#x27;recv_address&#x27;))</span><br><span class="line"></span><br><span class="line">    # 发送邮件</span><br><span class="line">    smtp = smtplib.SMTP()</span><br><span class="line">    smtp.connect(mail_info[&#x27;smtp_server&#x27;])</span><br><span class="line">    smtp.login(mail_info[&#x27;sender_name&#x27;], mail_info[&#x27;sender_pwd&#x27;])</span><br><span class="line">    smtp.sendmail(mail_info[&#x27;sender_name&#x27;], mail_info[&#x27;recv_address&#x27;], msg.as_string())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nowip = get_ip() # 获取当前公网IP</span><br><span class="line"></span><br><span class="line">ip=&#x27;&#x27;</span><br><span class="line"># 读方式打开文件，取得ip</span><br><span class="line">try:</span><br><span class="line">    with open(fip, &#x27;r&#x27;) as f:</span><br><span class="line">        ip = f.read()</span><br><span class="line">except IOError:</span><br><span class="line">    print(&#x27;File open error&#x27;)</span><br><span class="line"></span><br><span class="line">if ip == nowip: # 与上次ip相同时退出</span><br><span class="line">    pass</span><br><span class="line">else:           # 与上次ip不同时</span><br><span class="line">    content = mail_info.get(&#x27;content&#x27;).format(nowip, ip)</span><br><span class="line">    send_message(content)</span><br><span class="line"></span><br><span class="line">    # 读写方式打开文件，如果文件不存在，新建，如果文件存在，覆盖写</span><br><span class="line">    with open(fip,&#x27;w+&#x27;) as f:</span><br><span class="line">        f.write(nowip)</span><br></pre></td></tr></table></figure>
-<h2 id="定时执行"><a href="#定时执行" class="headerlink" title="定时执行"></a>定时执行</h2><p>使用linux的定时运行程序“crontab”来实现树莓派的定时任务。</p>
-<ol>
-<li><p>命令行输入命令进入crontab设置文件。<br>PS:第一次进入会提示no crontab for root - using an empty one，意思是会新建一个空的设置文件，选择数字选择编辑器打开文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo crontab -e</span><br></pre></td></tr></table></figure></li>
-<li><p>在文件最后添加命令<br>PS：意思是每天的8，9···17点整执行命令【python3 /home/user/getip.py】</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># m h  dom mon dow   command</span><br><span class="line">0 8,9,10,11,12,13,14,15,16,17 * * * python3 /home/user/getip.py</span><br></pre></td></tr></table></figure></li>
-<li><p>使定时任务生效</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/cron restart</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>命令详细解释：<br>|分钟|    小时|    日期|    月份|    周|    指令|<br>|-|-|-|-|-|-|<br>|0-59|    0-23|    1-31|    1-12|    0-7，其中0和7都代表星期天|    指令|<br>*（星号）代表任何时刻<br>，（逗号）代表分隔时候。如3点与6点 就是3,6<br>-（减号）代表一段时间范围内。如：3点到6点 就是3-6<br>/n（斜线）n代表数字，即每隔n单位。如每隔五分钟，/5</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/04/09/%E5%85%AC%E7%BD%91IP%E5%8F%98%E5%8C%96%E6%97%B6%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5/" data-id="ckvv0bqvm000t4oqvgw4c0qza" data-title="公网IP变化时邮件通知" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" rel="tag">树莓派 | python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-web后端程序开发1-概述" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/08/web%E5%90%8E%E7%AB%AF%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%911-%E6%A6%82%E8%BF%B0/" class="article-date">
-  <time class="dt-published" datetime="2021-04-07T21:09:34.049Z" itemprop="datePublished">2021-04-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/web/">web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/08/web%E5%90%8E%E7%AB%AF%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%911-%E6%A6%82%E8%BF%B0/">web后端程序开发1-概述</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>一直做嵌入式开发，最近才开始接触web开发，在这里把自己学习到的东西记录下来作为笔记</p>
-<p>web开发一般有B/S（Browser/Server）,C/S（Client/Server）等形式，本文介绍B/S。<br>B/S其实可以理解为C/S的一种，只不过Client并不是自己开发的，而是使用浏览器。<br>当我们在浏览器输入网址到显示网页，这中间都发生了什么呢？</p>
-<p><img src="https://www.wushifei.com/upload/2021/04/%E5%9B%BE%E7%89%87-fb2719a110aa40f983099cbc161e6033.png" alt="图片.png"></p>
-<p>输入网址后浏览器会发送请求到DNS服务器，获得主机IP。<br>之后浏览器会自动发送HTTP请求到服务器主机，<br>服务器主机的web服务器接收到请求后会进行http协议解析，tcp/ip协议解析等一系列处理之后将请求发给应用程序。<br>应用程序根据请求给出对应的响应数据。web服务器将响应数据按协议打包发送到浏览器。<br>浏览器接收到html后解析并显示。</p>
-<p>所以，服务器主机的后台程序，就是一个while循环的程序，不停的检测端口是否收到请求，如果收到了就按写好的逻辑根据不同的请求发送不同的响应。</p>
-<p>另外之所以将web服务器和应用程序分开，是因为现在有很多开源的web框架，我们可以直接用框架来实现协议解析，路由等基础功能，把主要精力集中在应用程序的逻辑处理上。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/04/08/web%E5%90%8E%E7%AB%AF%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%911-%E6%A6%82%E8%BF%B0/" data-id="ckvv0bqvh000i4oqvf880htcb" data-title="web后端程序开发1-概述" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-GoDaddy设置二级域名解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/04/01/GoDaddy%E8%AE%BE%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/" class="article-date">
@@ -442,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/04/01/GoDaddy%E8%AE%BE%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/" data-id="ckvv0bqv500014oqvbd9q87wq" data-title="GoDaddy设置二级域名解析" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/04/01/GoDaddy%E8%AE%BE%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/" data-id="ckvv0ggbp000060qvc40l2wdx" data-title="GoDaddy设置二级域名解析" class="article-share-link">Share</a>
       
       
       
@@ -495,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/29/linux%E4%B8%AD%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C%E7%9A%84%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" data-id="ckvv0bqve000c4oqv0b7s3eav" data-title="linux中命令操作的文件名中有空格" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/29/linux%E4%B8%AD%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C%E7%9A%84%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" data-id="ckvv0ggby000660qv2ba99z4u" data-title="linux中命令操作的文件名中有空格" class="article-share-link">Share</a>
       
       
       
@@ -566,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/24/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9F%B3%E4%B9%90%E6%9C%8D%E5%8A%A1%E5%99%A8/" data-id="ckvv0bqvu001k4oqvdsuk7l6w" data-title="搭建自己的音乐服务器" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/24/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9F%B3%E4%B9%90%E6%9C%8D%E5%8A%A1%E5%99%A8/" data-id="ckvv0ggcc001560qvf9u81rbm" data-title="搭建自己的音乐服务器" class="article-share-link">Share</a>
       
       
       
@@ -626,50 +341,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/20/Mac%E5%BC%80%E5%8F%91%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" data-id="ckvv0bqva00054oqvf6s50ueu" data-title="Mac开发必要软件安装" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/20/Mac%E5%BC%80%E5%8F%91%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" data-id="ckvv0ggbt000160qvfust6o4w" data-title="Mac开发必要软件安装" class="article-share-link">Share</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/" rel="tag">mac</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-cpuminer 编译" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/03/19/cpuminer%20%E7%BC%96%E8%AF%91/" class="article-date">
-  <time class="dt-published" datetime="2021-03-18T16:56:57.830Z" itemprop="datePublished">2021-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/03/19/cpuminer%20%E7%BC%96%E8%AF%91/">cpuminer 编译</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/19/cpuminer%20%E7%BC%96%E8%AF%91/" data-id="ckvv0bqvc00074oqvcbxt4iyg" data-title="cpuminer 编译" class="article-share-link">Share</a>
-      
-      
-      
     </footer>
   </div>
   
@@ -732,11 +409,369 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/18/%E4%BD%BF%E7%94%A8vscode%E8%B0%83%E8%AF%95WSL%E4%B8%AD%E7%9A%84%E7%A8%8B%E5%BA%8F/" data-id="ckvv0bqvk000p4oqv9j8j6yal" data-title="使用vscode调试WSL中的程序" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/18/%E4%BD%BF%E7%94%A8vscode%E8%B0%83%E8%AF%95WSL%E4%B8%AD%E7%9A%84%E7%A8%8B%E5%BA%8F/" data-id="ckvv0ggc0000a60qvc61r3pvr" data-title="使用vscode调试WSL中的程序" class="article-share-link">Share</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL-vscode/" rel="tag">WSL | vscode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-SVN不能Cleanup解决方法 Cleanup failed to process the following paths" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/16/SVN%E4%B8%8D%E8%83%BDCleanup%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20Cleanup%20failed%20to%20process%20the%20following%20paths/" class="article-date">
+  <time class="dt-published" datetime="2021-03-15T22:56:10.998Z" itemprop="datePublished">2021-03-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/knowhow/">knowhow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/16/SVN%E4%B8%8D%E8%83%BDCleanup%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20Cleanup%20failed%20to%20process%20the%20following%20paths/">SVN不能Cleanup解决方法 Cleanup failed to process the following paths</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h2><p>SVN执行Update时弹出Update Failed错误提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Previous operation has not finished; run &#x27;cleanup&#x27; if it was interrupted</span><br><span class="line">Please execute the &#x27;Cleanup&#x27; command.</span><br></pre></td></tr></table></figure>
+
+<p>执行Cleanup时弹出提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Cleanup failed to process the following paths:</span><br><span class="line">D:\**</span><br><span class="line">Previous operation has not finished; run &#x27;cleanup&#x27; if it was interrupted</span><br><span class="line">Please execute the &#x27;Cleanup&#x27; command.</span><br></pre></td></tr></table></figure>
+<p>进入了死循环。</p>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>SVN操作失败（比如在文件打开状态下update），这个时候Update操作其实存储在svn的数据库中等待被执行，这之后的操作就要等数据库的update操作成功后才能执行。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>从数据库中将前一次的失败操作删除。<br>1, sqlite3数据库操作用工具下载<br>官网：<a target="_blank" rel="noopener" href="https://sqlite.org/download.html">https://sqlite.org/download.html</a><br>根据需要下载对应版本<br>我的Win10使用版本：sqlite-tools-win32-x86-3320200.zip<br>2, 压缩包中的sqlite3.exe文件解压到.svn文件夹中<br>3, 在CMD下执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.\sqlite3.exe wc.db</span><br><span class="line">SQLite version 3.32.2 2020-06-04 12:58:43</span><br><span class="line">Enter &quot;.help&quot; for usage hints.</span><br><span class="line"># 从队列中删除上一次的操作</span><br><span class="line">sqlite&gt; select * from work_queue;</span><br><span class="line">sqlite&gt; delete from work_queue;</span><br><span class="line"></span><br><span class="line"># 从队列中删除路径的lock的</span><br><span class="line">sqlite&gt; select * from wc_lock;</span><br><span class="line">sqlite&gt; delete from wc_lock;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/03/16/SVN%E4%B8%8D%E8%83%BDCleanup%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20Cleanup%20failed%20to%20process%20the%20following%20paths/" data-id="ckvv0ggbx000560qvhdutax20" data-title="SVN不能Cleanup解决方法 Cleanup failed to process the following paths" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/" rel="tag">svn</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-群晖硬盘数据读取" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/" class="article-date">
+  <time class="dt-published" datetime="2021-03-09T20:01:23.779Z" itemprop="datePublished">2021-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/knowhow/">knowhow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/">群晖硬盘数据读取</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>目标：群晖拆下硬盘中的数据拷贝到移动硬盘中</p>
+<h2 id="1-群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，"><a href="#1-群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，" class="headerlink" title="1. 群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，"></a>1. 群晖拆下的硬盘放到硬盘盒，通过USB插到树莓派上，</h2><h2 id="2-移动硬盘通过USB查到树莓派"><a href="#2-移动硬盘通过USB查到树莓派" class="headerlink" title="2. 移动硬盘通过USB查到树莓派"></a>2. 移动硬盘通过USB查到树莓派</h2><h2 id="3-输入命令查看硬盘信息"><a href="#3-输入命令查看硬盘信息" class="headerlink" title="3. 输入命令查看硬盘信息"></a>3. 输入命令查看硬盘信息</h2><p>   /dev/sdb是群晖硬盘<br>其中/dev/sdb1和/dev/sdb2分区是群晖系统用，/dev/sdb5才是数据存储用分区<br>   /dev/sdc是移动硬盘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk –l</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sdb: 3.7 TiB, 4000787030016 bytes, 7814037168 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 4096 bytes</span><br><span class="line">I/O size (minimum/optimal): 4096 bytes / 4096 bytes</span><br><span class="line">Disklabel type: gpt</span><br><span class="line">Disk identifier: 0B6B4E4C-7C1F-4834-AD96-8B1A4C779AEF</span><br><span class="line"></span><br><span class="line">Device       Start        End    Sectors  Size Type</span><br><span class="line">/dev/sdb1     2048    4982527    4980480  2.4G Linux RAID</span><br><span class="line">/dev/sdb2  4982528    9176831    4194304    2G Linux RAID</span><br><span class="line">/dev/sdb5  9453280 7813830239 7804376960  3.6T Linux RAID</span><br><span class="line"></span><br><span class="line">Disk /dev/sdc: 1.4 TiB, 1500301910016 bytes, 2930277168 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disklabel type: dos</span><br><span class="line">Disk identifier: 0x4eea0366</span><br><span class="line"></span><br><span class="line">Device     Boot Start        End    Sectors  Size Id Type</span><br><span class="line">/dev/sdc1           2 2930277167 2930277166  1.4T  7 HPFS/NTFS/exFAT</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-创建文件加用来挂在硬盘"><a href="#4-创建文件加用来挂在硬盘" class="headerlink" title="4. 创建文件加用来挂在硬盘"></a>4. 创建文件加用来挂在硬盘</h2><p>   src用来挂载群晖硬盘<br>   dst用来挂载移动硬盘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /mnt/src</span><br><span class="line">sudo mkdir /mnt/dst</span><br><span class="line">ls /mnt</span><br><span class="line"></span><br><span class="line">dst  src</span><br></pre></td></tr></table></figure>
+<h2 id="5-挂载群晖硬盘"><a href="#5-挂载群晖硬盘" class="headerlink" title="5. 挂载群晖硬盘"></a>5. 挂载群晖硬盘</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdb5 /mnt/src</span><br><span class="line"></span><br><span class="line">mount: unknown filesystem type &#x27;linux_raid_member&#x27;</span><br></pre></td></tr></table></figure>
+<p>上面提示是因为群晖的软linux_raid格式不能直接挂载，需要安装两个软件mdadm和lvm2</p>
+<h3 id="5-1-安装mdadm和lvm2"><a href="#5-1-安装mdadm和lvm2" class="headerlink" title="5.1 安装mdadm和lvm2"></a>5.1 安装mdadm和lvm2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mdadm lvm2</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-扫描群晖硬盘"><a href="#5-2-扫描群晖硬盘" class="headerlink" title="5.2 扫描群晖硬盘"></a>5.2 扫描群晖硬盘</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdadm -Asf &amp;&amp; vgchange -ay</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-查看Logical-Volume信息"><a href="#5-3-查看Logical-Volume信息" class="headerlink" title="5.3 查看Logical Volume信息"></a>5.3 查看Logical Volume信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo lvdisplay</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">--- Logical volume ---</span><br><span class="line">LV Path                /dev/vg1001/lv</span><br><span class="line">LV Name                lv</span><br><span class="line">VG Name                vg1001</span><br><span class="line">LV UUID                36nTHZ-D4IF-m5e3-rNhI-kg6x-OwpT-5mSYCs</span><br><span class="line">LV Write Access        read/write</span><br><span class="line">LV Creation host, time ,</span><br><span class="line">LV Status              available</span><br><span class="line"># open                 0</span><br><span class="line">LV Size                3.63 TiB</span><br><span class="line">Current LE             952682</span><br><span class="line">Segments               1</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently set to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-挂载"><a href="#5-4-挂载" class="headerlink" title="5.4 挂载"></a>5.4 挂载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/vg1001/lv /mnt/src</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-查看挂载是否成功"><a href="#5-5-查看挂载是否成功" class="headerlink" title="5.5 查看挂载是否成功"></a>5.5 查看挂载是否成功</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /mnt/src</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@afpd.core                  homes                  @SYNO.Finder.Fil.core</span><br><span class="line">@appstore                   music                  @SynologyApplicationService</span><br><span class="line">aquota.group                OWDownload             @synologydrive</span><br><span class="line">aquota.user                 photo                  @synophoto-geoco.core</span><br><span class="line">@autoupdate                 @S2S                   synoquota.db</span><br><span class="line">@builtin-dyn-aut.core       svn                    @SystemInfo.cgi.core</span><br><span class="line">@cloudsync                  @synoaudiod.core       @temp@</span><br><span class="line">@database                   @SYNO.Core.DSMNo.core  @tmp</span><br><span class="line">@download                   @SYNO.Core.Syste.core  @transmissiond.core</span><br><span class="line">@eaDir                      @SynoDrive             video</span><br><span class="line">esynoscheduler.output.4094  @synoelasticd.core     web</span><br><span class="line">esynoscheduler.output.8630  @SYNO.Entry.Requ.core  work</span><br><span class="line">esynoscheduler.output.8701  @SYNO.FileStatio.core</span><br></pre></td></tr></table></figure>
+<p>OK</p>
+<h2 id="6-挂载移动硬盘"><a href="#6-挂载移动硬盘" class="headerlink" title="6. 挂载移动硬盘"></a>6. 挂载移动硬盘</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdc1 /mnt/dst</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount: unknown filesystem type &#x27;exfat&#x27;</span><br></pre></td></tr></table></figure>
+<p>不支持exfat文件系统，需要先安装依赖</p>
+<h3 id="6-1-安装exfat-fuse"><a href="#6-1-安装exfat-fuse" class="headerlink" title="6.1 安装exfat-fuse"></a>6.1 安装exfat-fuse</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install exfat-fuse</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-挂载"><a href="#6-2-挂载" class="headerlink" title="6.2 挂载"></a>6.2 挂载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdc1 /mnt/dst</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FUSE exfat 1.2.5</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-查看挂载是否成功"><a href="#6-3-查看挂载是否成功" class="headerlink" title="6.3 查看挂载是否成功"></a>6.3 查看挂载是否成功</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /mnt/dst</span><br></pre></td></tr></table></figure>
+<p>OK</p>
+<h2 id="7，在后台拷贝"><a href="#7，在后台拷贝" class="headerlink" title="7，在后台拷贝"></a>7，在后台拷贝</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nohup cp -r /mnt/src/ /mnt/dst/ &gt;cp_src2dst.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1] 1652</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/" data-id="ckvv0ggcf001h60qvbf7rgzpd" data-title="群晖硬盘数据读取" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-树莓派搭建SVN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BASVN/" class="article-date">
+  <time class="dt-published" datetime="2021-03-07T18:05:43.108Z" itemprop="datePublished">2021-03-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BASVN/">树莓派搭建SVN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">sudo apt-get install subversion</span><br><span class="line"># 卸载</span><br><span class="line">sudo apt-get remove --purge subversion</span><br></pre></td></tr></table></figure>
+<h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><p>svnadmin create /home/pi/svn</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>配置仓库<br>sudo nano /home/pi/svn/conf/svnserve.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 配置信息</span><br><span class="line"></span><br><span class="line">anon-access = none   </span><br><span class="line">#控制非鉴权用户访问版本库的权限。取值范围为&quot;write&quot;、&quot;read&quot;和&quot;none&quot;。即&quot;write&quot;为可读可写，&quot;read&quot;为只读，&quot;none&quot;表示无访问权限。缺省值：read</span><br><span class="line"></span><br><span class="line">auth-access = write </span><br><span class="line">#控制鉴权用户访问版本库的权限。取值范围为&quot;write&quot;、&quot;read&quot;和&quot;none&quot;。即&quot;write&quot;为可读可写，&quot;read&quot;为只读，&quot;none&quot;表示无访问权限。缺省值：write</span><br><span class="line"></span><br><span class="line">password-db = passwd </span><br><span class="line"># 指定账户密码配置文件，当前文件夹下的passwd文件</span><br><span class="line"></span><br><span class="line">authz-db = authz</span><br><span class="line"># 权限配置文件，当前文件夹下的authz文件</span><br></pre></td></tr></table></figure></li>
+<li><p>创建用户<br>sudo nano /home/pi/svn/conf/passwd</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 用户创建</span><br><span class="line">[users]</span><br><span class="line"># harry = harryssecret</span><br><span class="line"># sally = sallyssecret</span><br><span class="line">username1=password1			# 一行一个 用户名=密码</span><br><span class="line">username2=password2</span><br><span class="line">username3=password3</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>配置权限<br>sudo nano /home/pi/svn/conf/authz<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 权限配置</span><br><span class="line">[groups]</span><br><span class="line"># harry_and_sally = harry,sally</span><br><span class="line"># harry_sally_and_joe = harry,sally,&amp;joe</span><br><span class="line"></span><br><span class="line"># [/foo/bar]</span><br><span class="line"># harry = rw</span><br><span class="line"># &amp;joe = r</span><br><span class="line"># * =</span><br><span class="line">admin=username1		# 角色划分</span><br><span class="line">user=username2,username3</span><br><span class="line"></span><br><span class="line"># [repository:/baz/fuz]</span><br><span class="line"># @harry_and_sally = rw</span><br><span class="line"># * = r</span><br><span class="line">[/]		# 访问路径</span><br><span class="line">@admin=rw		# 权限配置，rw</span><br><span class="line">@user=r</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>svnserve -d -r /home/pi/svn</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">svnserve -d -r /home/pi/svn</span><br><span class="line"># -d 表示守护线程后台运行 -r 表示指定目录</span><br><span class="line"></span><br><span class="line"># 查看是否启动成功</span><br><span class="line">ps -ef|grep svnserve</span><br><span class="line"></span><br><span class="line"># 自动启动，在/etc/rc.local 中添加如上启动语句</span><br></pre></td></tr></table></figure>
+
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>用客户端打开svn://192.168.1.4:3690</p>
+<h2 id="修改默认端口"><a href="#修改默认端口" class="headerlink" title="修改默认端口"></a>修改默认端口</h2><p>Subversion有两种不同的配置方式，一种基于它自带的轻量级服务器svnserve，一种基于非常流行的Web服务器Apache。<br>根据不同的配置方式，Subversion使用不同的端口对外提供服务。</p>
+<p>基于svnserve的，默认端口为3690，</p>
+<p>基于Apache的，默认端口为Apache的默认端口80。</p>
+<p>不同的配置修改默认端口方法不同：</p>
+<ul>
+<li><p>通过svnserve -d -r /home/pi/svn来提供服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 为svnserve 加上--listen-port参数</span><br><span class="line">svnserve -d -r  /home/pi/svn --listen-port 10000</span><br></pre></td></tr></table></figure></li>
+<li><p>通过Apache来提供服务<br>在httpd.conf中，查找Listen 80，将80修改为你想要的端口<br>```</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/03/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BASVN/" data-id="ckvv0ggcd001b60qv203pa86q" data-title="树莓派搭建SVN" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" rel="tag">树莓派 | svn</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-电脑远程开机" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/06/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA/" class="article-date">
+  <time class="dt-published" datetime="2021-03-06T03:30:23.389Z" itemprop="datePublished">2021-03-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iot/">iot</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/06/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA/">电脑远程开机</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近买了一个ESP01S继电器模块，装到电脑上，结合现有的树莓派实现电脑远程开机。</p>
+<h2 id="通信流程"><a href="#通信流程" class="headerlink" title="通信流程"></a>通信流程</h2><p>手机-&gt;树莓派-&gt;路由器-&gt;ESP01S+继电器<br>今天主要介绍ESP01S+继电器的部分<br>ESP01S连接到路由器，在路由器上设置其IP为固定IP，<br>树莓派访问ESP01S的web服务，<br>当ESP01S接收到时，设定继电器开关。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ul>
+<li>ESP01S程序烧录</li>
+<li>连接电脑</li>
+</ul>
+<h2 id="ESP01S程序烧录"><a href="#ESP01S程序烧录" class="headerlink" title="ESP01S程序烧录"></a>ESP01S程序烧录</h2><ol>
+<li><p>固件下载：<a target="_blank" rel="noopener" href="https://github.com/IOT-MCU/ESP-01S-Relay-v4.0">https://github.com/IOT-MCU/ESP-01S-Relay-v4.0</a></p>
+</li>
+<li><p>ESP01S连接下载器<br>ESP01S模块<br><img src="https://www.wushifei.com/upload/2021/03/20210306-1-3-45f400c961094198b86673ed4b14b4fd.jpg" alt="2021030613.jpg"><br>下载器，直接插上就可以<br><img src="https://www.wushifei.com/upload/2021/03/20210306-1-2-b9e4ca6bb944452babb626e4439ea316.jpg" alt="2021030612.jpg"><br>连接到电脑上之后如果识别不到串口，可以下载<a target="_blank" rel="noopener" href="https://docs.ai-thinker.com/_media/tools/serial_driver_windos.7z">这个驱动</a></p>
+</li>
+<li><p>NodeMCU烧录<br> 3.1 打开flash_download_tools_v3.6.4<br>选择ESP8266 Download Toll<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-ecac0013b8d846059ed37e7116a48495.png" alt="图片.png"></p>
+<p> 3.2 设置参数<br>bin文件选择firmware/nodemcu_integer_0.9.6-dev_20150704.bin<br>COM选择电脑上对应的端口<br>其他按下图设置<br>PS：BUAD设置过高可能会出现下载失败<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-8051d05a878745ac93073ffa19e2ec3a.png" alt="图片.png"></p>
+<p> 3.3 点击ERASE<br> 3.4 再bin文件前打勾✔，点击START</p>
+</li>
+<li><p>lua程序上传<br> 4.1 打开LuaLoader<br> 4.2 设置端口参数,Port选择对应的端口，其他按下图设置<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-4607da96a69048a6b255ded58f576927.png" alt="图片.png"><br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-d39c6c9b4c5d415f9fd79928cba28e7f.png" alt="图片.png"><br> 4.3 菜单栏右边Connect，右上区域会变绿<br> 4.4 上传文件，选择light control v4.0/init.lua<br>PS：先用这个原始程序试一下，之后会修改这个lua程序<br> 4.5 发送<br> 4.6 点击 dofile<br>当出现MAC和IP信息时表示程序运行成功，记下MAC地址，修改静态IP的时候会用到。<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-1bb6625d5707400da9da4284bedc4cee.png" alt="图片.png"></p>
+</li>
+<li><p>修改lua程序之后，再次执行4<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-0c96e12ccd424ca58f1a826ca8af54c7.png" alt="图片.png"></p>
+</li>
+<li><p>将ESP01S模块从下载器上拔下来，查到继电器上，并给继电器的接通5V电源<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-da9e7dbfd86e41f4b955113b42a19ff5.png" alt="图片.png"></p>
+</li>
+<li><p>修改为静态IP<br>上电后登录路由器，根据ESP01S的MAC地址找到设备，并修改为静态IP，例如192.168.1.20</p>
+</li>
+<li><p>继电器开关确认<br>在电脑的浏览器中输入下列网址，继电器开关打开，指示灯亮<br><a target="_blank" rel="noopener" href="http://192.168.1.20/?pin=ON1">http://192.168.1.20?pin=ON1</a><br>在电脑的浏览器中输入下列网址，继电器开关关闭，指示灯灭</p>
+</li>
+</ol>
+<h2 id="连接电脑"><a href="#连接电脑" class="headerlink" title="连接电脑"></a>连接电脑</h2><ol>
+<li>继电器5V电源连接<br>B460M-PLUS主板的<br>5v电源在这个位置，接到继电器的VCC和GND<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-f519daa1bcdc45aa8156c78a0d0ca674.png" alt="图片.png"></li>
+<li>继电器输出连接<br>B460M-PLUS主板的<br>开机接口在这个位置，接到继电器的COM和NO<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-22b17497f4d0473eb056e1230b945aba.png" alt="图片.png"><br>为了使机箱的开关和继电器开关共存，把手头的杜邦线改成了1通2的形式<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-03da152756104e7496e356e8a247b604.png" alt="图片.png"><br>完成图，记得给继电器包上塑料，做好绝缘。<br><img src="https://www.wushifei.com/upload/2021/03/%E5%9B%BE%E7%89%87-ab06349f01a045579dd0d9b1dcd9e509.png" alt="图片.png"></li>
+</ol>
+<p>到这里就其实就已经可以控制了，不过只能在局域网通过浏览器进行。<br>为了在外网可以远程控制，需要家里网络的公网IP和将端口映射。<br>在这里就细说了。<br>我用的是公网IP+DDNS+树莓派执行sh命令实现的<br>sh命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl 192.168.1.20/?pin=ON1</span><br><span class="line">sleep 0.2s</span><br><span class="line">curl 192.168.1.20/?pin=OFF1</span><br></pre></td></tr></table></figure>
+
+<p>如果有问题请留言。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/03/06/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA/" data-id="ckvv0ggce001e60qv3bi53k28" data-title="电脑远程开机" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" rel="tag">电脑远程开机 | esp01s | esp8266</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-博客搭建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/05/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time class="dt-published" datetime="2021-03-04T23:50:33.046Z" itemprop="datePublished">2021-03-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/05/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>记录本章搭建过程：<br>需要对linux的基础操作有了解，如果不了解或者碰到问题请在下面评论。</p>
+<h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><ul>
+<li>VPS或虚拟主机</li>
+<li>域名</li>
+</ul>
+<h2 id="服务器搭建"><a href="#服务器搭建" class="headerlink" title="服务器搭建"></a>服务器搭建</h2><p>本站使用的是<a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=8085791">Vultr</a>的VPS，在我用过的VPS中，Vultr是使用最简单交互最简单的了。</p>
+<h3 id="Vultr-VSP申请"><a href="#Vultr-VSP申请" class="headerlink" title="Vultr VSP申请"></a>Vultr VSP申请</h3><p>如果使用其他厂商VPS或者虚拟主机可以跳过本章</p>
+<ol>
+<li><p>注册<br>打开  <a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=8493215-6G">Vultr官网</a>，输入邮箱和密码，点击“Create Account” 。 ​</p>
+</li>
+<li><p>激活<br>充值10美元，可以用支付宝，信用卡等。</p>
+</li>
+<li><p>创建实例</p>
+<ol>
+<li><p>点击右上的加号<br><img src="https://www.wushifei.com/upload/2021/03/20210305-2-1-0511d9738b404d268f66faabe7e1ffca.png" alt="2021030521.png"></p>
+</li>
+<li><p>选择服务器<br>选择离中国比较近的访问速度会快一点<br><img src="https://www.wushifei.com/upload/2021/03/20210305-2-2-32cfbde65b2f40dc96cf467a5a35830b.png" alt="2021030522.png"></p>
+</li>
+<li><p>选择OS，和配置，点击 Deploy Now<br>个人比较习惯用Ubuntu，配置根据需要，访问量不大的话1G内存够用<br><img src="https://www.wushifei.com/upload/2021/03/20210305-2-3-fa7b205070584a5b8cf70355f76d1b85.png" alt="2021030523.png"></p>
+</li>
+</ol>
+</li>
+<li><p>大约3分钟左右创建完成后可以看见IP，用户名，密码，用这些信息登录VPS</p>
+</li>
+</ol>
+<h3 id="博客系统安装"><a href="#博客系统安装" class="headerlink" title="博客系统安装"></a>博客系统安装</h3><p>比较了一些博客系统最终选择了halo，很轻便。<br>注意，从 1.4.3 起，java版本要求为 11 以上的版本。1.4.3 以下需要 java 1.8 以上的版本。<br>安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/halo-dev/halo/releases/download/v1.4.5/halo-1.4.5.jar --output halo.jar</span><br><span class="line"></span><br><span class="line">java -jar halo.jar</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>更多请参考<a target="_blank" rel="noopener" href="https://halo.run/">官网</a></p>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>我是在Godaddy购买的域名，其他厂商操作类似。<br>购买完成后再域名的DNS管理处修改A类解析到VPS的公网IP</p>
+<p><img src="https://www.wushifei.com/upload/2021/03/20210305-2-4-7d05bf8ec74f4c409d529cbe1100da8d.png" alt="2021030524.png"></p>
+<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><p>由于halo的默认端口是8090，而且我的VPS上运行了别的服务占用了443，<br>所以修改了/etc/nginx/conf.d/<a target="_blank" rel="noopener" href="http://www.wushifei.com.conf文件,/">www.wushifei.com.conf文件，</a><br>使访问<a target="_blank" rel="noopener" href="http://www.wushifei.com时,会链接到8090端口./">www.wushifei.com时，会链接到8090端口。</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/nginx/conf.d/www.wushifei.com.conf</span><br></pre></td></tr></table></figure>
+<p>在location / 下追加proxy_pass</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl http2;</span><br><span class="line">    listen       [::]:443 ssl http2;</span><br><span class="line">    server_name www.wushifei.com;</span><br><span class="line">    charset utf-8;</span><br><span class="line"></span><br><span class="line"># 追加这一句</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8090;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>重新加载使设置生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>根据域名商不同，过几分钟~几小时不等，就可以用域名访问了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wushifei.com/2021/03/05/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" data-id="ckvv0ggc6000o60qvcmhh8nv6" data-title="博客搭建" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" rel="tag">博客 | vps | halo</a></li></ul>
 
     </footer>
   </div>
@@ -771,7 +806,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL-vscode/" rel="tag">WSL | vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnf/" rel="tag">dnf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-scp/" rel="tag">linux | scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" rel="tag">ppg | 心率测量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/" rel="tag">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps-%E5%9F%9F%E5%90%8D/" rel="tag">vps | 域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" rel="tag">博客 | vps | halo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">树莓派 | jellyfin | 多媒体服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" rel="tag">树莓派 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" rel="tag">树莓派 | svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" rel="tag">树莓派 | 域名 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" rel="tag">比特币 | bitcoin core | vs2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" rel="tag">电脑远程开机 | esp01s | esp8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL-vscode/" rel="tag">WSL | vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnf/" rel="tag">dnf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-scp/" rel="tag">linux | scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" rel="tag">ppg | 心率测量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/" rel="tag">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps-%E5%9F%9F%E5%90%8D/" rel="tag">vps | 域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" rel="tag">博客 | vps | halo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">树莓派 | jellyfin | 多媒体服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" rel="tag">树莓派 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" rel="tag">树莓派 | svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" rel="tag">树莓派 | 域名 | python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" rel="tag">电脑远程开机 | esp01s | esp8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a></li></ul>
     </div>
   </div>
 
@@ -781,7 +816,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/VBA/" style="font-size: 10px;">VBA</a> <a href="/tags/WSL-vscode/" style="font-size: 10px;">WSL | vscode</a> <a href="/tags/dnf/" style="font-size: 10px;">dnf</a> <a href="/tags/linux-scp/" style="font-size: 10px;">linux | scp</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" style="font-size: 10px;">ppg | 心率测量</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vps-%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">vps | 域名</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" style="font-size: 10px;">博客 | vps | halo</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">树莓派 | jellyfin | 多媒体服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" style="font-size: 10px;">树莓派 | python</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" style="font-size: 10px;">树莓派 | svn</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" style="font-size: 10px;">树莓派 | 域名 | python</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81-bitcoin-core-vs2019/" style="font-size: 10px;">比特币 | bitcoin core | vs2019</a> <a href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" style="font-size: 10px;">电脑远程开机 | esp01s | esp8266</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a>
+      <a href="/tags/VBA/" style="font-size: 10px;">VBA</a> <a href="/tags/WSL-vscode/" style="font-size: 10px;">WSL | vscode</a> <a href="/tags/dnf/" style="font-size: 10px;">dnf</a> <a href="/tags/linux-scp/" style="font-size: 10px;">linux | scp</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/ppg-%E5%BF%83%E7%8E%87%E6%B5%8B%E9%87%8F/" style="font-size: 10px;">ppg | 心率测量</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vps-%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">vps | 域名</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/%E5%8D%9A%E5%AE%A2-vps-halo/" style="font-size: 10px;">博客 | vps | halo</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-jellyfin-%E5%A4%9A%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">树莓派 | jellyfin | 多媒体服务器</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-python/" style="font-size: 10px;">树莓派 | python</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-svn/" style="font-size: 10px;">树莓派 | svn</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E5%9F%9F%E5%90%8D-python/" style="font-size: 10px;">树莓派 | 域名 | python</a> <a href="/tags/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA-esp01s-esp8266/" style="font-size: 10px;">电脑远程开机 | esp01s | esp8266</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a>
     </div>
   </div>
 
@@ -790,7 +825,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
     </div>
   </div>
 
