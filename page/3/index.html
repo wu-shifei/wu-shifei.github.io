@@ -72,74 +72,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-使用vscode调试WSL中的程序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/03/18/%E4%BD%BF%E7%94%A8vscode%E8%B0%83%E8%AF%95WSL%E4%B8%AD%E7%9A%84%E7%A8%8B%E5%BA%8F/" class="article-date">
-  <time class="dt-published" datetime="2021-03-17T21:59:09.817Z" itemprop="datePublished">2021-03-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/knowhow/">knowhow</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/03/18/%E4%BD%BF%E7%94%A8vscode%E8%B0%83%E8%AF%95WSL%E4%B8%AD%E7%9A%84%E7%A8%8B%E5%BA%8F/">使用vscode调试WSL中的程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="vscode扩展安装："><a href="#vscode扩展安装：" class="headerlink" title="vscode扩展安装："></a>vscode扩展安装：</h2><p>参考:<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/tutorials/wsl-vscode">https://docs.microsoft.com/zh-cn/windows/wsl/tutorials/wsl-vscode</a></p>
-<ul>
-<li>从Windows安装</li>
-</ul>
-<ol>
-<li>安装Windows版vscode</li>
-<li>在vscode中安装远程开发包[<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack%5D">https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack]</a></li>
-<li>CTRL+SHIFT+P 在 VS Code 中打开命令面板。 如果随后键入，您 Remote-WSL 将看到可用的 VS Code 远程选项的列表，允许您在远程会话中重新打开该文件夹，指定要打开的分发，等等。</li>
-</ol>
-<ul>
-<li>从WSL安装</li>
-</ul>
-<ol>
-<li>在WSL下执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code .</span><br></pre></td></tr></table></figure></li>
-<li>在WSL中的vscode中安装必要的扩展（C/C++等）</li>
-</ol>
-<h2 id="WSL中gdb安装"><a href="#WSL中gdb安装" class="headerlink" title="WSL中gdb安装"></a>WSL中gdb安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gdb </span><br></pre></td></tr></table></figure>
-<h2 id="WSL-vscode-gdb配置"><a href="#WSL-vscode-gdb配置" class="headerlink" title="WSL vscode gdb配置"></a>WSL vscode gdb配置</h2><p>launch.json</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    // 使用 IntelliSense 了解相关属性。 </span><br><span class="line">    // 悬停以查看现有属性的描述。</span><br><span class="line">    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span><br><span class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;(gdb) 启动&quot;,</span><br><span class="line">            &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">            &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">            &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/appname&quot;, //可执行程序</span><br><span class="line">            &quot;args&quot;: [&quot;-h&quot;],</span><br><span class="line">            &quot;stopAtEntry&quot;: false,</span><br><span class="line">            &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">            &quot;environment&quot;: [],</span><br><span class="line">            &quot;externalConsole&quot;: false,</span><br><span class="line">            &quot;MIMode&quot;: &quot;gdb&quot;,</span><br><span class="line">            &quot;miDebuggerPath&quot;: &quot;/usr/bin/gdb&quot;, //gdb 路径</span><br><span class="line">            &quot;setupCommands&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;description&quot;: &quot;为 gdb 启用整齐打印&quot;,</span><br><span class="line">                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">                    &quot;ignoreFailures&quot;: true</span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">            &quot;preLaunchTask&quot;: &quot;make&quot;  //debug前执行make处理</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可能碰到的问题：</p>
-<ol>
-<li>断点不停<br>可能是编译时没有debug信息，看看CFLAG中没有-g参数</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/18/%E4%BD%BF%E7%94%A8vscode%E8%B0%83%E8%AF%95WSL%E4%B8%AD%E7%9A%84%E7%A8%8B%E5%BA%8F/" data-id="ckvuzyrn000102eqv29iz88py" data-title="使用vscode调试WSL中的程序" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL-vscode/" rel="tag">WSL | vscode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-比特币挖矿：libblkmaker编译" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/03/18/%E6%AF%94%E7%89%B9%E5%B8%81%E6%8C%96%E7%9F%BF%EF%BC%9Alibblkmaker%E7%BC%96%E8%AF%91/" class="article-date">
@@ -181,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/18/%E6%AF%94%E7%89%B9%E5%B8%81%E6%8C%96%E7%9F%BF%EF%BC%9Alibblkmaker%E7%BC%96%E8%AF%91/" data-id="ckvuzyrnd00212eqv4xbw758e" data-title="比特币挖矿：libblkmaker编译" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/18/%E6%AF%94%E7%89%B9%E5%B8%81%E6%8C%96%E7%9F%BF%EF%BC%9Alibblkmaker%E7%BC%96%E8%AF%91/" data-id="ckvv0bqvw001t4oqv5ds55ovg" data-title="比特币挖矿：libblkmaker编译" class="article-share-link">Share</a>
       
       
       
@@ -233,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/16/SVN%E4%B8%8D%E8%83%BDCleanup%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20Cleanup%20failed%20to%20process%20the%20following%20paths/" data-id="ckvuzyrmg00042eqv8te62h94" data-title="SVN不能Cleanup解决方法 Cleanup failed to process the following paths" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/16/SVN%E4%B8%8D%E8%83%BDCleanup%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20Cleanup%20failed%20to%20process%20the%20following%20paths/" data-id="ckvv0bqvb00064oqvghf0e0mk" data-title="SVN不能Cleanup解决方法 Cleanup failed to process the following paths" class="article-share-link">Share</a>
       
       
       
@@ -305,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/" data-id="ckvuzyrnc001x2eqv0kdka9ki" data-title="群晖硬盘数据读取" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/10/%E7%BE%A4%E6%99%96%E7%A1%AC%E7%9B%98%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/" data-id="ckvv0bqvx001v4oqv48sk6eop" data-title="群晖硬盘数据读取" class="article-share-link">Share</a>
       
       
       
@@ -376,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BASVN/" data-id="ckvuzyrnc001v2eqvfbqn4f3w" data-title="树莓派搭建SVN" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BASVN/" data-id="ckvv0bqvw001p4oqv95g1esp6" data-title="树莓派搭建SVN" class="article-share-link">Share</a>
       
       
       
@@ -437,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/07/VS2019%E7%BC%96%E8%AF%91%E6%AF%94%E7%89%B9%E5%B8%81%E6%BA%90%E7%A0%81(%20Bitcoin%20Core%20build%20by%20Virtual%20Studio%202019)/" data-id="ckvuzyrml00072eqv8p1q4dzs" data-title="VS2019编译比特币源码( Bitcoin Core build by Virtual Studio 2019)" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/07/VS2019%E7%BC%96%E8%AF%91%E6%AF%94%E7%89%B9%E5%B8%81%E6%BA%90%E7%A0%81(%20Bitcoin%20Core%20build%20by%20Virtual%20Studio%202019)/" data-id="ckvv0bqvd000b4oqvcjon7l1u" data-title="VS2019编译比特币源码( Bitcoin Core build by Virtual Studio 2019)" class="article-share-link">Share</a>
       
       
       
@@ -515,7 +447,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/06/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA/" data-id="ckvuzyrng002g2eqvgr8vhoq6" data-title="电脑远程开机" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/06/%E7%94%B5%E8%84%91%E8%BF%9C%E7%A8%8B%E5%BC%80%E6%9C%BA/" data-id="ckvv0bqvy001z4oqv1yeq003v" data-title="电脑远程开机" class="article-share-link">Share</a>
       
       
       
@@ -598,7 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/05/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" data-id="ckvuzyrn300182eqv3cted53m" data-title="博客搭建" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/05/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" data-id="ckvv0bqvm000w4oqvcvpd9jdc" data-title="博客搭建" class="article-share-link">Share</a>
       
       
       
@@ -643,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wushifei.com/2021/03/05/Hello%20World/" data-id="ckvuzyrmc00012eqv21o700c6" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="https://wushifei.com/2021/03/05/Hello%20World/" data-id="ckvv0bqv600024oqvebgsg1tp" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -712,10 +644,6 @@
       <ul>
         
           <li>
-            <a href="/2021/11/07/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
             <a href="/2021/11/07/%E5%9C%A8%E5%90%8C%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E7%9A%84ssh%20key%E3%80%90ssh%20key%20already%20in%20use%20github%E3%80%91/">在同一台电脑上管理多个github账号的ssh key【ssh key already in use github】</a>
           </li>
         
@@ -729,6 +657,10 @@
         
           <li>
             <a href="/2021/10/04/%E5%88%A9%E7%94%A8github%20pages%E6%89%98%E7%AE%A1%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/">利用github pages托管静态网站</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/14/%E6%A0%87%E8%AE%B0%E9%80%89%E4%B8%AD%E5%8D%95%E5%85%83%E6%A0%BC%E4%B8%AD%E9%87%8D%E5%A4%8D%E9%A1%B9%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAVBA%E4%BB%A3%E7%A0%81/">标记选中单元格中重复项的第一个VBA代码</a>
           </li>
         
       </ul>
